@@ -28,47 +28,47 @@ export default function Sidebar({ isOpen, closeSidebar }) {
     {
       title: null,
       items: [
-        { icon: <Home size={18} />, label: "Dashboard" }
+        { icon: <Home size={18} strokeWidth={1.5} />, label: "Dashboard" }
       ]
     },
     {
       title: "OPERATIONS",
       items: [
-        { icon: <ShoppingBag size={18} />, label: "Orders", badge: 18 },
-        { icon: <Box size={18} />, label: "Inventory" },
-        { icon: <CornerDownLeft size={18} />, label: "Returns" },
-        { icon: <ArrowLeftRight size={18} />, label: "Stock Transfers" },
+        { icon: <ShoppingBag size={18} strokeWidth={1.5} />, label: "Orders", badge: 18 },
+        { icon: <Box size={18} strokeWidth={1.5} />, label: "Inventory" },
+        { icon: <CornerDownLeft size={18} strokeWidth={1.5} />, label: "Returns" },
+        { icon: <ArrowLeftRight size={18} strokeWidth={1.5} />, label: "Stock Transfers" },
       ]
     },
     {
       title: "ANALYTICS",
       items: [
-        { icon: <BarChart2 size={18} />, label: "Sales Analytics" },
-        { icon: <TrendingUp size={18} />, label: "Forecast" },
-        { icon: <Award size={18} />, label: "Performance" },
+        { icon: <BarChart2 size={18} strokeWidth={1.5} />, label: "Sales Analytics" },
+        { icon: <TrendingUp size={18} strokeWidth={1.5} />, label: "Forecast" },
+        { icon: <Award size={18} strokeWidth={1.5} />, label: "Performance" },
       ]
     },
     {
       title: "MANAGEMENT",
       items: [
-        { icon: <Users size={18} />, label: "Officers & Teams" },
-        { icon: <UserCheck size={18} />, label: "Customers" },
-        { icon: <Truck size={18} />, label: "Suppliers" },
+        { icon: <Users size={18} strokeWidth={1.5} />, label: "Officers & Teams" },
+        { icon: <UserCheck size={18} strokeWidth={1.5} />, label: "Customers" },
+        { icon: <Truck size={18} strokeWidth={1.5} />, label: "Suppliers" },
       ]
     },
     {
       title: "TOOLS",
       items: [
-        { icon: <Bell size={18} />, label: "Notifications", badge: 3 },
-        { icon: <FileText size={18} />, label: "Reports" },
-        { icon: <Blocks size={18} />, label: "Integrations" },
+        { icon: <Bell size={18} strokeWidth={1.5} />, label: "Notifications", badge: 3 },
+        { icon: <FileText size={18} strokeWidth={1.5} />, label: "Reports" },
+        { icon: <Blocks size={18} strokeWidth={1.5} />, label: "Integrations" },
       ]
     },
     {
       title: "SETTINGS",
       items: [
-        { icon: <Settings size={18} />, label: "Settings" },
-        { icon: <User size={18} />, label: "Profile" },
+        { icon: <Settings size={18} strokeWidth={1.5} />, label: "Settings" },
+        { icon: <User size={18} strokeWidth={1.5} />, label: "Profile" },
       ]
     }
   ];

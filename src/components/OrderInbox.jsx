@@ -34,7 +34,7 @@ export default function OrderInbox() {
       <div className={styles.header}>
         <div className={styles.titleArea}>
           <div className={styles.iconWrapper}>
-            <ClipboardList size={18} color="#5438ff" />
+            <ClipboardList size={20} strokeWidth={1.5} />
           </div>
           <h3>Order Inbox</h3>
         </div>

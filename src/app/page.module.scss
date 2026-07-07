@@ -44,7 +44,7 @@
   }
 
   .newOrderBtn {
-    background: $brand-gradient;
+    background: $brand-primary;
     color: white;
     padding: $spacing-2 $spacing-4;
     border-radius: $radius-md;
@@ -53,7 +53,7 @@
     gap: $spacing-3;
     font-size: 0.85rem;
     font-weight: 600;
-    box-shadow: $shadow-glow;
+    box-shadow: $shadow-md;
     transition: transform 0.2s, box-shadow 0.2s;
 
     &:hover {

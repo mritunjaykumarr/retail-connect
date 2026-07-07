@@ -1,54 +1,67 @@
-// Colors
-$bg-primary: #f9f9fc; // Light soft grey background
-$bg-surface: #ffffff;
-$text-primary: #1e1e1e;
-$text-secondary: #757575;
-$text-tertiary: #a0a0a0;
+:root {
+  --bg-canvas: #f8fafc; // slate-50
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9; // slate-100
+  
+  --text-primary: #0f172a; // slate-900
+  --text-secondary: #475569; // slate-600
+  --text-tertiary: #94a3b8; // slate-400
+  
+  --brand-primary: #6366f1; // indigo-500
+  --brand-primary-light: #e0e7ff; // indigo-100
+  --brand-accent: #4f46e5; // indigo-600
+  
+  --sidebar-bg: #0f172a; // slate-900
+  --sidebar-text: #94a3b8;
+  --sidebar-text-active: #ffffff;
+  --sidebar-active-bg: #1e293b; // slate-800
+  
+  --border-light: #e2e8f0; // slate-200
+  --border-medium: #cbd5e1; // slate-300
+}
 
-// Sidebar & Accents
-$brand-sidebar-bg: linear-gradient(180deg, #16152a 0%, #1c1c38 100%);
-$brand-primary: #5438ff; // Deep blue/purple
-$brand-accent: #6b4efc; // Vibrant purple
-$brand-gradient: linear-gradient(90deg, #5c41ff 0%, #7656ff 100%);
-$sidebar-text: #a1a3b8;
-$sidebar-text-active: #ffffff;
+$bg-primary: var(--bg-canvas);
+$bg-surface: var(--bg-surface);
+$bg-surface-hover: var(--bg-surface-hover);
 
-// Card Icon Backgrounds
-$icon-bg-purple: #f3efff;
-$icon-purple: #6a35ff;
-$icon-bg-orange: #fff4ec;
-$icon-orange: #fd7e14;
-$icon-bg-green: #e9f9f0;
-$icon-green: #10b981;
-$icon-bg-blue: #ecf3ff;
-$icon-blue: #3b82f6;
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$text-tertiary: var(--text-tertiary);
+
+$brand-primary: var(--brand-primary);
+$brand-primary-light: var(--brand-primary-light);
+$brand-accent: var(--brand-accent);
+$brand-sidebar-bg: var(--sidebar-bg);
+$sidebar-text: var(--sidebar-text);
+$sidebar-text-active: var(--sidebar-text-active);
+$sidebar-active-bg: var(--sidebar-active-bg);
+
+$border-light: var(--border-light);
+$border-medium: var(--border-medium);
 
 // Status colors
-$status-success: #10b981;
-$status-success-light: #e6f7f1;
-$status-warning: #f59e0b;
-$status-warning-light: #fef5e6;
-$status-danger: #ef4444;
-$status-danger-light: #feecec;
-$status-pending: #fb8c00;
-$status-pending-light: #fff3e0;
-$status-transit: #3b82f6;
-$status-transit-light: #eff6ff;
+$status-success: #059669;
+$status-success-light: #d1fae5;
+$status-warning: #d97706;
+$status-warning-light: #fef3c7;
+$status-danger: #dc2626;
+$status-danger-light: #fee2e2;
+$status-pending: #ea580c;
+$status-pending-light: #ffedd5;
+$status-transit: #2563eb;
+$status-transit-light: #dbeafe;
 
-// Borders & Dividers
-$border-light: #f1f1f4;
-$border-medium: #e2e4e9;
+// Shadows (Subtler)
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.03), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+$shadow-floating: 0 20px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 
-// Effects
-$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
-$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.04);
-$shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.06);
-$shadow-glow: 0 4px 14px rgba(92, 65, 255, 0.3);
-
-$radius-sm: 6px;
+// Radii
+$radius-sm: 8px;
 $radius-md: 12px;
 $radius-lg: 16px;
-$radius-pill: 999px;
+$radius-pill: 9999px;
 
 // Spacing
 $spacing-1: 0.25rem;

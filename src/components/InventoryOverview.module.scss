@@ -25,8 +25,9 @@
     .iconWrapper {
       width: 32px;
       height: 32px;
-      border-radius: 8px;
-      background: $icon-bg-purple;
+      border-radius: $radius-sm;
+      background: var(--brand-primary-light);
+      color: var(--brand-accent);
       @include flex-center;
     }
 
@@ -100,12 +101,15 @@
   @include flex-between;
   padding: $spacing-3;
   background: white;
-  border-radius: 8px;
-  border: 1px solid $border-light;
-  transition: background 0.2s;
+  border-radius: $radius-md;
+  border: 1px solid transparent;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 
   &:hover {
-    background: $bg-primary;
+    background: white;
+    box-shadow: $shadow-sm;
+    transform: translateY(-1px);
+    border-color: $border-light;
   }
 }
 

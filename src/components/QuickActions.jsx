@@ -4,17 +4,17 @@ import styles from "./QuickActions.module.scss";
 
 export default function QuickActions() {
   const actions = [
-    { label: "Create Order", icon: <ClipboardPlus size={16} />, color: "purple" },
-    { label: "Add Inventory", icon: <PlusSquare size={16} />, color: "green" },
-    { label: "Stock Transfer", icon: <ArrowLeftRight size={16} />, color: "blue" },
-    { label: "Create Invoice", icon: <FileText size={16} />, color: "pink" },
-    { label: "View Reports", icon: <FileBarChart size={16} />, color: "orange" },
+    { label: "Create Order", icon: <ClipboardPlus size={18} strokeWidth={1.5} /> },
+    { label: "Add Inventory", icon: <PlusSquare size={18} strokeWidth={1.5} /> },
+    { label: "Stock Transfer", icon: <ArrowLeftRight size={18} strokeWidth={1.5} /> },
+    { label: "Create Invoice", icon: <FileText size={18} strokeWidth={1.5} /> },
+    { label: "View Reports", icon: <FileBarChart size={18} strokeWidth={1.5} /> },
   ];
 
   return (
     <div className={styles.quickActionsRow}>
       {actions.map((action, idx) => (
-        <button key={idx} className={`${styles.actionBtn} ${styles[action.color]}`}>
+        <button key={idx} className={styles.actionBtn}>
           <div className={styles.iconWrapper}>
             {action.icon}
           </div>

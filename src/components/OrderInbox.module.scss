@@ -25,8 +25,9 @@
     .iconWrapper {
       width: 32px;
       height: 32px;
-      border-radius: 8px;
-      background: $icon-bg-purple;
+      border-radius: $radius-sm;
+      background: var(--brand-primary-light);
+      color: var(--brand-accent);
       @include flex-center;
     }
 
@@ -117,6 +118,10 @@
 }
 
 .thead {
+  position: sticky;
+  top: 0;
+  background: var(--bg-surface);
+  z-index: 5;
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr 0.5fr 0.8fr 0.8fr 1fr;
   padding: $spacing-2;
@@ -141,13 +146,17 @@
 .row {
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr 0.5fr 0.8fr 0.8fr 1fr;
-  padding: $spacing-2;
+  padding: $spacing-2 $spacing-3;
   align-items: center;
-  border-radius: 8px;
-  transition: background 0.2s;
+  border-radius: $radius-md;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  border: 1px solid transparent;
 
   &:hover {
-    background: $bg-primary;
+    background: var(--bg-surface-hover);
+    box-shadow: $shadow-sm;
+    transform: translateY(-1px);
+    border-color: $border-light;
   }
 }
 
@@ -219,32 +228,29 @@
 }
 
 .statusBadge {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: $radius-pill;
+  font-size: 0.75rem;
   font-weight: 600;
-  display: inline-block;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
   
   &.pending {
-    background: $status-pending-light;
-    color: $status-pending;
+    background: #fff7ed; color: #c2410c; border-color: #ffedd5;
   }
   &.accepted {
-    background: $status-success-light;
-    color: $status-success;
+    background: #f0fdf4; color: #15803d; border-color: #dcfce7;
   }
   &.transit {
-    background: $status-transit-light;
-    color: $status-transit;
+    background: #eff6ff; color: #1d4ed8; border-color: #dbeafe;
   }
   &.delivered {
-    background: $status-success-light;
-    color: $status-success;
+    background: #f0fdf4; color: #15803d; border-color: #dcfce7;
   }
   &.rejected {
-    background: $status-danger-light;
-    color: $status-danger;
+    background: #fef2f2; color: #b91c1c; border-color: #fee2e2;
   }
 }
 

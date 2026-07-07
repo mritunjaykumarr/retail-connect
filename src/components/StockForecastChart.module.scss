@@ -24,8 +24,9 @@
     .iconWrapper {
       width: 32px;
       height: 32px;
-      border-radius: 8px;
-      background: $icon-bg-purple;
+      border-radius: $radius-sm;
+      background: var(--brand-primary-light);
+      color: var(--brand-accent);
       @include flex-center;
     }
 

@@ -1,4 +1,6 @@
 "use client";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import DashboardLayout from "../components/DashboardLayout";
 import KPICards from "../components/KPICards";
 import QuickActions from "../components/QuickActions";
@@ -6,33 +8,30 @@ import OrderInbox from "../components/OrderInbox";
 import StockForecastChart from "../components/StockForecastChart";
 import InventoryOverview from "../components/InventoryOverview";
 import BottomMetricsBar from "../components/BottomMetricsBar";
-import { motion } from "framer-motion";
 import { Plus, Calendar, ChevronDown } from "lucide-react";
 import styles from "./page.module.scss";
 
 export default function Home() {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
+  const containerRef = useRef(null);
 
-  const item = {
-    hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 350, damping: 25 } }
-  };
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      gsap.from(".animate-item", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+      });
+    }, containerRef);
+    
+    return () => ctx.revert();
+  }, []);
 
   return (
     <DashboardLayout>
-      <motion.div 
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className={styles.dashboardContainer}
-      >
-        <motion.div variants={item} className={styles.pageHeader}>
+      <div ref={containerRef} className={styles.dashboardContainer}>
+        <div className={`${styles.pageHeader} animate-item`}>
           <div className={styles.greeting}>
             <h1>Good morning, <span className={styles.highlight}>Aman!</span> 👋</h1>
             <p>Here's what's happening with your business today.</p>
@@ -50,31 +49,31 @@ export default function Home() {
               <ChevronDown size={14} color="#757575" />
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div variants={item}>
+        <div className="animate-item">
           <KPICards />
-        </motion.div>
-        
-        <motion.div variants={item}>
-          <QuickActions />
-        </motion.div>
-        
-        <div className={styles.mainGrid}>
-          <motion.div variants={item} className={styles.leftCol}>
-            <OrderInbox />
-          </motion.div>
-          
-          <motion.div variants={item} className={styles.rightCol}>
-            <StockForecastChart />
-            <InventoryOverview />
-          </motion.div>
         </div>
         
-        <motion.div variants={item}>
+        <div className="animate-item">
+          <QuickActions />
+        </div>
+        
+        <div className={styles.mainGrid}>
+          <div className={`${styles.leftCol} animate-item`}>
+            <OrderInbox />
+          </div>
+          
+          <div className={`${styles.rightCol} animate-item`}>
+            <StockForecastChart />
+            <InventoryOverview />
+          </div>
+        </div>
+        
+        <div className="animate-item">
           <BottomMetricsBar />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </DashboardLayout>
   );
 }
