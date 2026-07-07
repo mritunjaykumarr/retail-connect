@@ -1,0 +1,177 @@
+@import '../app/variables';
+@import '../app/mixins';
+
+.container {
+  background: white;
+  border-radius: $radius-lg;
+  padding: $spacing-5;
+  box-shadow: $shadow-sm;
+  border: 1px solid $border-light;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.header {
+  @include flex-between;
+  margin-bottom: $spacing-4;
+
+  .titleArea {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    
+    .iconWrapper {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: $icon-bg-purple;
+      @include flex-center;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      color: $text-primary;
+      font-weight: 700;
+    }
+  }
+
+  .iconBtn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid $border-medium;
+    border-radius: $radius-pill;
+    background: transparent;
+    color: $text-secondary;
+    @include flex-center;
+    transition: background 0.2s;
+
+    &:hover {
+      background: $bg-primary;
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: $spacing-2;
+  margin-bottom: $spacing-4;
+  border-bottom: 1px solid $border-light;
+  padding-bottom: $spacing-3;
+  overflow-x: auto;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    padding: $spacing-1 $spacing-3;
+    border-radius: $radius-pill;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $text-secondary;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    background: transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+    
+    &:hover {
+      background: $bg-primary;
+    }
+
+    &.activeTab {
+      background: $brand-primary;
+      color: white;
+    }
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+  margin-bottom: $spacing-4;
+  overflow-x: auto;
+}
+
+.item {
+  @include flex-between;
+  padding: $spacing-3;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid $border-light;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $bg-primary;
+  }
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  
+  .itemIconBox {
+    width: 36px;
+    height: 36px;
+    background: #fef2f2;
+    border-radius: 8px;
+    @include flex-center;
+  }
+  
+  .itemDetails {
+    display: flex;
+    flex-direction: column;
+    
+    .name {
+      font-weight: 600;
+      color: $text-primary;
+      font-size: 0.85rem;
+    }
+    
+    .sku {
+      font-size: 0.75rem;
+      color: $text-secondary;
+    }
+  }
+}
+
+.itemMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  
+  .statusBadge {
+    background: #fef2f2;
+    color: #ef4444;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+  
+  .units {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $text-primary;
+  }
+}
+
+.viewAllBtn {
+  margin-top: auto;
+  font-size: 0.75rem;
+  color: $brand-primary;
+  font-weight: 600;
+  text-align: center;
+  padding-top: $spacing-3;
+  border-top: 1px solid $border-light;
+  transition: opacity 0.2s;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}

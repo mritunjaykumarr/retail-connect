@@ -1,0 +1,288 @@
+@import '../app/variables';
+@import '../app/mixins';
+
+.container {
+  background: white;
+  border-radius: $radius-lg;
+  padding: $spacing-5;
+  box-shadow: $shadow-sm;
+  border: 1px solid $border-light;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.header {
+  @include flex-between;
+  margin-bottom: $spacing-4;
+
+  .titleArea {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    
+    .iconWrapper {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: $icon-bg-purple;
+      @include flex-center;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      color: $text-primary;
+      font-weight: 700;
+    }
+  }
+
+  .headerActions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+  }
+
+  .filterBtn {
+    @include flex-center;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-3;
+    border: 1px solid $border-medium;
+    border-radius: $radius-pill;
+    font-size: 0.75rem;
+    color: $text-secondary;
+    font-weight: 600;
+    background: transparent;
+    transition: background 0.2s;
+    
+    &:hover {
+      background: $bg-primary;
+    }
+  }
+
+  .iconBtn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid $border-medium;
+    border-radius: $radius-pill;
+    background: transparent;
+    color: $text-secondary;
+    @include flex-center;
+    transition: background 0.2s;
+
+    &:hover {
+      background: $bg-primary;
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: $spacing-2;
+  margin-bottom: $spacing-4;
+  border-bottom: 1px solid $border-light;
+  padding-bottom: $spacing-3;
+  overflow-x: auto;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    padding: $spacing-1 $spacing-3;
+    border-radius: $radius-pill;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $text-secondary;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    background: transparent;
+    white-space: nowrap;
+    flex-shrink: 0;
+    
+    &:hover {
+      background: $bg-primary;
+    }
+
+    &.activeTab {
+      background: $brand-primary;
+      color: white;
+    }
+  }
+}
+
+.table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.thead {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 0.5fr 0.8fr 0.8fr 1fr;
+  padding: $spacing-2;
+  color: $text-secondary;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: $spacing-2;
+  min-width: 800px;
+  
+  .centerAlign {
+    text-align: center;
+  }
+}
+
+.tbody {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-1;
+  min-width: 800px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 0.5fr 0.8fr 0.8fr 1fr;
+  padding: $spacing-2;
+  align-items: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $bg-primary;
+  }
+}
+
+.cell {
+  font-size: 0.8rem;
+  color: $text-primary;
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.orderIdStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  
+  .newBadge {
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 0.6rem;
+    padding: 0 4px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+}
+
+.soProfile {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  
+  .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .soInfo {
+    display: flex;
+    flex-direction: column;
+    
+    .soName {
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    
+    .soZone {
+      font-size: 0.7rem;
+      color: $text-secondary;
+    }
+  }
+}
+
+.datetime {
+  display: flex;
+  flex-direction: column;
+  
+  .date {
+    font-weight: 500;
+  }
+  
+  .time {
+    font-size: 0.7rem;
+    color: $text-secondary;
+  }
+}
+
+.statusBadge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  
+  &.pending {
+    background: $status-pending-light;
+    color: $status-pending;
+  }
+  &.accepted {
+    background: $status-success-light;
+    color: $status-success;
+  }
+  &.transit {
+    background: $status-transit-light;
+    color: $status-transit;
+  }
+  &.delivered {
+    background: $status-success-light;
+    color: $status-success;
+  }
+  &.rejected {
+    background: $status-danger-light;
+    color: $status-danger;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-1;
+  justify-content: center;
+}
+
+.actionIconBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid $border-light;
+  @include flex-center;
+  transition: background 0.2s, border-color 0.2s;
+  
+  &:hover {
+    background: $bg-primary;
+    border-color: $border-medium;
+  }
+}
+
+.footerRow {
+  margin-top: auto;
+  padding-top: $spacing-4;
+  display: flex;
+  justify-content: center;
+  
+  .viewAllBtn {
+    font-size: 0.75rem;
+    color: $brand-primary;
+    font-weight: 600;
+    transition: opacity 0.2s;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

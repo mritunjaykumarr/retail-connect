@@ -1,66 +1,80 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import DashboardLayout from "../components/DashboardLayout";
+import KPICards from "../components/KPICards";
+import QuickActions from "../components/QuickActions";
+import OrderInbox from "../components/OrderInbox";
+import StockForecastChart from "../components/StockForecastChart";
+import InventoryOverview from "../components/InventoryOverview";
+import BottomMetricsBar from "../components/BottomMetricsBar";
+import { motion } from "framer-motion";
+import { Plus, Calendar, ChevronDown } from "lucide-react";
+import styles from "./page.module.scss";
 
 export default function Home() {
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 15 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 350, damping: 25 } }
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <DashboardLayout>
+      <motion.div 
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className={styles.dashboardContainer}
+      >
+        <motion.div variants={item} className={styles.pageHeader}>
+          <div className={styles.greeting}>
+            <h1>Good morning, <span className={styles.highlight}>Aman!</span> 👋</h1>
+            <p>Here's what's happening with your business today.</p>
+          </div>
+          <div className={styles.headerActions}>
+            <button className={styles.newOrderBtn}>
+              <Plus size={16} />
+              <span>New Order</span>
+              <div className={styles.divider}></div>
+              <ChevronDown size={16} />
+            </button>
+            <div className={styles.datePicker}>
+              <Calendar size={14} color="#757575" />
+              <span>07 July, 2026</span>
+              <ChevronDown size={14} color="#757575" />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div variants={item}>
+          <KPICards />
+        </motion.div>
+        
+        <motion.div variants={item}>
+          <QuickActions />
+        </motion.div>
+        
+        <div className={styles.mainGrid}>
+          <motion.div variants={item} className={styles.leftCol}>
+            <OrderInbox />
+          </motion.div>
+          
+          <motion.div variants={item} className={styles.rightCol}>
+            <StockForecastChart />
+            <InventoryOverview />
+          </motion.div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        
+        <motion.div variants={item}>
+          <BottomMetricsBar />
+        </motion.div>
+      </motion.div>
+    </DashboardLayout>
   );
 }

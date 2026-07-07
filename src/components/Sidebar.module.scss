@@ -1,0 +1,201 @@
+@import '../app/variables';
+@import '../app/mixins';
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: $brand-sidebar-bg;
+  color: $sidebar-text;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-6 $spacing-4;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  overflow-y: auto;
+  border-right: none;
+  transition: transform 0.3s ease;
+  
+  @media (max-width: 768px) {
+    transform: translateX(-100%);
+  }
+
+  &.open {
+    transform: translateX(0);
+  }
+  
+  /* hide scrollbar for sidebar */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.logoContainer {
+  @include flex-center;
+  justify-content: flex-start;
+  margin-bottom: $spacing-8;
+  gap: $spacing-3;
+  padding-left: $spacing-2;
+
+  .logoMark {
+    background: transparent;
+    border: 2px solid #f9cd48; // Yellow/Gold from screenshot
+    color: #f9cd48;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px; // Squircle shape in screenshot
+    @include flex-center;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .logoText {
+    display: flex;
+    flex-direction: column;
+
+    .brand {
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.3px;
+    }
+    .subtitle {
+      font-size: 0.7rem;
+      color: $sidebar-text;
+    }
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-6;
+}
+
+.navSection {
+  .sectionTitle {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: $spacing-3;
+    padding-left: $spacing-2;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  li {
+    @include flex-center;
+    justify-content: space-between;
+    padding: 10px $spacing-3;
+    border-radius: $radius-lg;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: $sidebar-text;
+
+    .itemLeft {
+      display: flex;
+      align-items: center;
+      gap: $spacing-3;
+    }
+
+    &:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &.active {
+      background: $brand-gradient;
+      color: white;
+      box-shadow: $shadow-glow;
+    }
+
+    .badge {
+      background-color: $brand-primary;
+      color: white;
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: $radius-pill;
+      font-weight: 600;
+    }
+  }
+}
+
+.bottomSection {
+  margin-top: auto;
+  padding-top: $spacing-8;
+  display: flex;
+  flex-direction: column;
+}
+
+.premiumCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius-lg;
+  padding: $spacing-4;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+  position: relative;
+  overflow: hidden;
+
+  // Glassmorphic shine
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+
+  .premiumHeader {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    color: white; 
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    .premiumIcon {
+      color: #f9cd48; // Gold
+    }
+  }
+
+  p {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: $sidebar-text;
+  }
+
+  .upgradeBtn {
+    background: linear-gradient(90deg, #6a35ff 0%, #ff6b6b 100%);
+    color: white;
+    border: none;
+    padding: $spacing-2 $spacing-4;
+    border-radius: $radius-md;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: $spacing-2;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(106, 53, 255, 0.4);
+    }
+  }
+}

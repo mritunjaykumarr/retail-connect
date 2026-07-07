@@ -1,0 +1,165 @@
+@import '../app/variables';
+@import '../app/mixins';
+
+.header {
+  @include flex-between;
+  padding: $spacing-4 $spacing-6;
+  background-color: transparent;
+  margin-bottom: $spacing-6;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+}
+
+.menuGridBtn {
+  color: $text-tertiary;
+  background: transparent;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  @include flex-center;
+  
+  &:hover {
+    background: rgba(0,0,0,0.05);
+    color: $text-secondary;
+  }
+}
+
+.centerSection {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: $spacing-12;
+  
+  @media (max-width: 768px) {
+    display: none; // hide search on mobile
+  }
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: $spacing-2 $spacing-3;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  width: 480px;
+  border: 1px solid $border-light;
+  gap: $spacing-3;
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+  &:focus-within {
+    box-shadow: $shadow-md;
+    border-color: #d1d5db;
+  }
+
+  .searchIcon {
+    margin-left: $spacing-1;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.85rem;
+    width: 100%;
+    color: $text-primary;
+    
+    &::placeholder {
+      color: $text-tertiary;
+    }
+  }
+
+  .shortcutKey {
+    background: $bg-primary;
+    border: 1px solid $border-light;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: $text-secondary;
+    letter-spacing: 1px;
+  }
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: $spacing-6;
+}
+
+.notificationBtn {
+  position: relative;
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  @include flex-center;
+  box-shadow: $shadow-sm;
+  border: 1px solid $border-light;
+  transition: transform 0.2s;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  .badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #ff4b4b;
+    color: white;
+    font-size: 0.65rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    @include flex-center;
+    font-weight: 700;
+    border: 2px solid white;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  cursor: pointer;
+  padding: $spacing-1;
+  border-radius: $radius-pill;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba(0,0,0,0.03);
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+
+    .name {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: $text-primary;
+    }
+
+    .role {
+      font-size: 0.7rem;
+      color: $text-secondary;
+    }
+  }
+
+  .chevron {
+    margin-left: $spacing-1;
+  }
+}
