@@ -4,12 +4,10 @@
   display: flex;
   flex-direction: column;
   gap: $space-6;
-  padding-bottom: $space-12; // Room for bottom bar
 }
 
 .pageHeader {
   @include flex-between;
-  margin-bottom: $space-2;
   flex-wrap: wrap;
   gap: $space-4;
 
