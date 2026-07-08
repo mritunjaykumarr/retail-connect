@@ -1,25 +1,24 @@
-@import '../app/variables';
-@import '../app/mixins';
+@use "../styles/mixins" as *;
 
 .container {
   display: flex;
-  background: linear-gradient(90deg, #16152a 0%, #1c1c38 100%);
-  border-radius: $radius-lg;
-  padding: $spacing-4 $spacing-6;
-  margin-top: $spacing-6;
-  gap: $spacing-6;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: $space-4 $space-6;
+  margin-top: $space-6;
+  gap: $space-6;
   justify-content: space-between;
-  box-shadow: $shadow-md;
   flex-wrap: wrap;
 }
 
 .metricBlock {
   display: flex;
   flex-direction: column;
-  gap: $spacing-1;
+  gap: $space-1;
   flex: 1;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  padding-right: $spacing-6;
+  border-right: 1px solid var(--border-subtle);
+  padding-right: $space-6;
   min-width: 150px;
 
   @media (max-width: 768px) {
@@ -33,31 +32,35 @@
   }
 
   .label {
-    color: #a0a0b0;
-    font-size: 0.8rem;
-    font-weight: 500;
+    color: var(--text-3);
+    font-size: var(--text-sm);
+    font-weight: $weight-medium;
   }
 
   .valueRow {
     display: flex;
     align-items: baseline;
-    gap: $spacing-3;
+    gap: $space-3;
   }
 
   .value {
-    color: white;
-    font-size: 1.4rem;
-    font-weight: 700;
+    color: var(--text-1);
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: $weight-bold;
+    line-height: 1.1;
+    letter-spacing: $tracking-tight;
+    @include tabular-nums;
   }
 
   .trend {
     display: flex;
     align-items: center;
     gap: 2px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: var(--text-caption);
+    font-weight: $weight-semibold;
 
-    &.positive { color: $status-success; }
-    &.negative { color: $status-danger; }
+    &.positive { color: var(--success); }
+    &.negative { color: var(--danger); }
   }
 }

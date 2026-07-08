@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import DashboardLayout from "../components/DashboardLayout";
 import KPICards from "../components/KPICards";
@@ -8,11 +8,16 @@ import OrderInbox from "../components/OrderInbox";
 import StockForecastChart from "../components/StockForecastChart";
 import InventoryOverview from "../components/InventoryOverview";
 import BottomMetricsBar from "../components/BottomMetricsBar";
-import { Plus, Calendar, ChevronDown } from "lucide-react";
+import { Modal, Button, Input, Checkbox, useToast } from "../components/ui";
+import { FiPlus, FiCalendar, FiChevronDown } from "react-icons/fi";
 import styles from "./page.module.scss";
 
 export default function Home() {
   const containerRef = useRef(null);
+  const [newOrderOpen, setNewOrderOpen] = useState(false);
+  const [retailer, setRetailer] = useState("");
+  const [orderValue, setOrderValue] = useState("");
+  const toast = useToast();
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -28,6 +33,22 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
 
+  const handleCreateOrder = (e) => {
+    e.preventDefault();
+    if (!retailer) {
+      toast.danger("Validation error", {
+        description: "Please enter a retailer name.",
+      });
+      return;
+    }
+    setNewOrderOpen(false);
+    toast.success("Order created", {
+      description: `New order for ${retailer} (value: ₹${orderValue || '0.00'}) has been submitted.`,
+    });
+    setRetailer("");
+    setOrderValue("");
+  };
+
   return (
     <DashboardLayout>
       <div ref={containerRef} className={styles.dashboardContainer}>
@@ -37,16 +58,19 @@ export default function Home() {
             <p>Here's what's happening with your business today.</p>
           </div>
           <div className={styles.headerActions}>
-            <button className={styles.newOrderBtn}>
-              <Plus size={16} />
+            <button 
+              className={styles.newOrderBtn}
+              onClick={() => setNewOrderOpen(true)}
+            >
+              <FiPlus size={16} />
               <span>New Order</span>
               <div className={styles.divider}></div>
-              <ChevronDown size={16} />
+              <FiChevronDown size={16} />
             </button>
             <div className={styles.datePicker}>
-              <Calendar size={14} color="#757575" />
+              <FiCalendar size={14} />
               <span>07 July, 2026</span>
-              <ChevronDown size={14} color="#757575" />
+              <FiChevronDown size={14} />
             </div>
           </div>
         </div>
@@ -74,6 +98,41 @@ export default function Home() {
           <BottomMetricsBar />
         </div>
       </div>
+
+      <Modal
+        open={newOrderOpen}
+        onClose={() => setNewOrderOpen(false)}
+        title="Create new order"
+        description="Submit a secondary sales order for approval."
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setNewOrderOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleCreateOrder}>
+              Submit Order
+            </Button>
+          </>
+        }
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
+          <Input 
+            label="Retailer name" 
+            placeholder="e.g. Sharma General Store" 
+            value={retailer}
+            onChange={(e) => setRetailer(e.target.value)}
+            required
+          />
+          <Input 
+            label="Estimated value" 
+            placeholder="0.00" 
+            leading="₹"
+            value={orderValue}
+            onChange={(e) => setOrderValue(e.target.value)}
+          />
+          <Checkbox label="Notify distributor officer by SMS" defaultChecked />
+        </div>
+      </Modal>
     </DashboardLayout>
   );
 }

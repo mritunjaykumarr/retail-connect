@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { Package, MoreHorizontal, AlertCircle } from "lucide-react";
+import { FiPackage, FiMoreHorizontal, FiAlertCircle } from "react-icons/fi";
+import { Tabs, Badge } from "./ui";
 import styles from "./InventoryOverview.module.scss";
 
 const inventoryItems = [
@@ -17,28 +18,23 @@ export default function InventoryOverview() {
       <div className={styles.header}>
         <div className={styles.titleArea}>
           <div className={styles.iconWrapper}>
-            <Package size={18} color="#5438ff" />
+            <FiPackage size={18} />
           </div>
           <h3>Inventory Overview</h3>
         </div>
         <button className={styles.iconBtn}>
-          <MoreHorizontal size={16} />
+          <FiMoreHorizontal size={16} />
         </button>
       </div>
       
-      <div className={styles.tabs}>
-        <button 
-          className={`${styles.tab} ${activeTab === 'Low Stock' ? styles.activeTab : ''}`}
-          onClick={() => setActiveTab('Low Stock')}
-        >
-          Low Stock
-        </button>
-        <button 
-          className={`${styles.tab} ${activeTab === 'Expiring Soon' ? styles.activeTab : ''}`}
-          onClick={() => setActiveTab('Expiring Soon')}
-        >
-          Expiring Soon
-        </button>
+      <div className={styles.tabsWrap}>
+        <Tabs
+          items={[{ value: "Low Stock", label: "Low Stock" }, { value: "Expiring Soon", label: "Expiring Soon" }]}
+          value={activeTab}
+          onChange={setActiveTab}
+          variant="underline"
+          size="sm"
+        />
       </div>
 
       <div className={styles.list}>
@@ -46,7 +42,7 @@ export default function InventoryOverview() {
           <div key={item.id} className={styles.item}>
             <div className={styles.itemInfo}>
               <div className={styles.itemIconBox}>
-                <AlertCircle size={16} color="#ef4444" />
+                <FiAlertCircle size={16} />
               </div>
               <div className={styles.itemDetails}>
                 <span className={styles.name}>{item.name}</span>
@@ -55,7 +51,7 @@ export default function InventoryOverview() {
             </div>
             
             <div className={styles.itemMeta}>
-              <span className={styles.statusBadge}>{item.status}</span>
+              <Badge tone="danger" variant="soft" size="sm">{item.status}</Badge>
               <span className={styles.units}>{item.units} Units</span>
             </div>
           </div>

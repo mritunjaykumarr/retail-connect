@@ -1,11 +1,10 @@
-@import '../app/variables';
-@import '../app/mixins';
+@use "../styles/mixins" as *;
 
 .header {
   @include flex-between;
-  padding: $spacing-4 $spacing-6;
+  padding: $space-4 $space-6;
   background-color: transparent;
-  margin-bottom: $spacing-6;
+  margin-bottom: $space-6;
 }
 
 .leftSection {
@@ -14,11 +13,11 @@
 }
 
 .menuGridBtn {
-  color: $text-tertiary;
+  color: var(--text-3);
   background: transparent;
   width: 36px;
   height: 36px;
-  border-radius: $radius-sm;
+  border-radius: var(--radius-sm);
   @include flex-center;
   display: none; // hide on desktop by default
   
@@ -27,8 +26,8 @@
   }
   
   &:hover {
-    background: rgba(0,0,0,0.05);
-    color: $text-secondary;
+    background: var(--surface-hover);
+    color: var(--text-2);
   }
 }
 
@@ -36,7 +35,7 @@
   flex: 1;
   display: flex;
   justify-content: flex-start;
-  padding-left: $spacing-12;
+  padding-left: $space-12;
   
   @media (max-width: 768px) {
     display: none; // hide search on mobile
@@ -46,23 +45,21 @@
 .searchContainer {
   display: flex;
   align-items: center;
-  background: white;
-  padding: $spacing-2 $spacing-3;
-  border-radius: $radius-md;
-  box-shadow: $shadow-sm;
+  background: var(--surface);
+  padding: $space-2 $space-3;
+  border-radius: var(--radius-md);
   width: 480px;
-  border: 1px solid $border-light;
-  gap: $spacing-3;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s;
+  border: 1px solid var(--border);
+  gap: $space-3;
+  transition: border-color $duration-base $ease-standard;
 
   &:focus-within {
-    box-shadow: $shadow-md;
-    border-color: #d1d5db;
-    transform: translateY(-1px);
+    border-color: var(--primary-border);
   }
 
   .searchIcon {
-    margin-left: $spacing-1;
+    margin-left: $space-1;
+    color: var(--text-3);
   }
 
   input {
@@ -70,23 +67,23 @@
     outline: none;
     background: transparent;
     font-family: inherit;
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     width: 100%;
-    color: $text-primary;
+    color: var(--text-1);
     
     &::placeholder {
-      color: $text-tertiary;
+      color: var(--text-4);
     }
   }
 
   .shortcutKey {
-    background: $bg-primary;
-    border: 1px solid $border-light;
-    border-radius: 4px;
+    background: var(--surface-sunken);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xs);
     padding: 2px 6px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: $text-secondary;
+    font-size: var(--text-caption);
+    font-weight: $weight-semibold;
+    color: var(--text-3);
     letter-spacing: 1px;
   }
 }
@@ -94,52 +91,53 @@
 .rightSection {
   display: flex;
   align-items: center;
-  gap: $spacing-6;
+  gap: $space-6;
 }
 
 .notificationBtn {
   position: relative;
-  background: white;
+  background: var(--surface);
+  color: var(--text-3);
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: var(--radius-md);
   @include flex-center;
-  box-shadow: $shadow-sm;
-  border: 1px solid $border-light;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+  border: 1px solid var(--border);
+  transition: background $duration-fast $ease-standard,
+    color $duration-fast $ease-standard;
   
   &:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: $shadow-md;
+    background: var(--surface-hover);
+    color: var(--text-1);
   }
 
   .badge {
     position: absolute;
     top: -2px;
     right: -2px;
-    background: #ff4b4b;
+    background: var(--danger);
     color: white;
     font-size: 0.65rem;
     width: 16px;
     height: 16px;
     border-radius: 50%;
     @include flex-center;
-    font-weight: 700;
-    border: 2px solid white;
+    font-weight: $weight-bold;
+    border: 2px solid var(--surface);
   }
 }
 
 .profile {
   display: flex;
   align-items: center;
-  gap: $spacing-3;
+  gap: $space-3;
   cursor: pointer;
-  padding: $spacing-1;
-  border-radius: $radius-pill;
-  transition: background 0.2s;
+  padding: $space-1;
+  border-radius: var(--radius-pill);
+  transition: background $duration-fast;
 
   &:hover {
-    background: rgba(0,0,0,0.03);
+    background: var(--surface-hover);
   }
 
   .avatar {
@@ -154,18 +152,19 @@
     flex-direction: column;
 
     .name {
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: $text-primary;
+      font-weight: $weight-semibold;
+      font-size: var(--text-sm);
+      color: var(--text-1);
     }
 
     .role {
-      font-size: 0.7rem;
-      color: $text-secondary;
+      font-size: var(--text-caption);
+      color: var(--text-3);
     }
   }
 
   .chevron {
-    margin-left: $spacing-1;
+    margin-left: $space-1;
+    color: var(--text-3);
   }
 }

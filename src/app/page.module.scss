@@ -1,64 +1,63 @@
-@import './variables';
-@import './mixins';
+@use "../styles/mixins" as *;
 
 .dashboardContainer {
   display: flex;
   flex-direction: column;
-  gap: $spacing-6;
-  padding-bottom: $spacing-12; // Room for bottom bar
+  gap: $space-6;
+  padding-bottom: $space-12; // Room for bottom bar
 }
 
 .pageHeader {
   @include flex-between;
-  margin-bottom: $spacing-2;
+  margin-bottom: $space-2;
   flex-wrap: wrap;
-  gap: $spacing-4;
+  gap: $space-4;
 
   .greeting {
     h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: $text-primary;
-      margin-bottom: $spacing-1;
+      font-size: var(--text-h2);
+      font-weight: $weight-bold;
+      color: var(--text-1);
+      margin-bottom: $space-1;
       display: flex;
       align-items: center;
-      gap: $spacing-2;
+      gap: $space-2;
       flex-wrap: wrap;
       
       .highlight {
-        color: $brand-primary;
+        color: var(--primary);
       }
     }
     
     p {
-      color: $text-secondary;
-      font-size: 0.9rem;
+      color: var(--text-2);
+      font-size: var(--text-sm);
     }
   }
 
   .headerActions {
     display: flex;
     align-items: center;
-    gap: $spacing-4;
+    gap: $space-4;
     flex-wrap: wrap;
   }
 
   .newOrderBtn {
-    background: $brand-primary;
-    color: white;
-    padding: $spacing-2 $spacing-4;
-    border-radius: $radius-md;
+    background: var(--primary);
+    color: var(--text-on-accent);
+    padding: $space-2 $space-4;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
-    gap: $spacing-3;
-    font-size: 0.85rem;
-    font-weight: 600;
-    box-shadow: $shadow-md;
-    transition: transform 0.2s, box-shadow 0.2s;
+    gap: $space-3;
+    font-size: var(--text-sm);
+    font-weight: $weight-semibold;
+    box-shadow: var(--shadow-md);
+    transition: transform $duration-fast $ease-standard, box-shadow $duration-fast $ease-standard;
 
     &:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(92, 65, 255, 0.4);
+      box-shadow: var(--shadow-lg);
     }
 
     .divider {
@@ -71,19 +70,19 @@
   .datePicker {
     display: flex;
     align-items: center;
-    gap: $spacing-3;
-    background: white;
-    padding: $spacing-2 $spacing-4;
-    border-radius: $radius-md;
-    border: 1px solid $border-medium;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: $text-primary;
-    box-shadow: $shadow-sm;
+    gap: $space-3;
+    background: var(--surface);
+    padding: $space-2 $space-4;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    font-size: var(--text-sm);
+    font-weight: $weight-semibold;
+    color: var(--text-1);
+    box-shadow: var(--shadow-sm);
     cursor: pointer;
 
     &:hover {
-      background: $bg-primary;
+      background: var(--surface-hover);
     }
   }
 }
@@ -91,7 +90,7 @@
 .mainGrid {
   display: grid;
   grid-template-columns: 1.8fr 1.2fr;
-  gap: $spacing-6;
+  gap: $space-6;
   
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
@@ -107,6 +106,6 @@
 .rightCol {
   display: flex;
   flex-direction: column;
-  gap: $spacing-6;
+  gap: $space-6;
   min-width: 0;
 }

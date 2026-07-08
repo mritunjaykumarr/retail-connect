@@ -1,10 +1,9 @@
-@import '../app/variables';
-@import '../app/mixins';
+@use "../styles/mixins" as *;
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: $spacing-6;
+  gap: $space-6;
 }
 
 .heroRow {
@@ -15,7 +14,7 @@
 .subGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: $spacing-6;
+  gap: $space-6;
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -23,43 +22,40 @@
 }
 
 .card {
-  background: linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-canvas) 100%);
-  border-radius: $radius-lg;
-  padding: $spacing-5;
-  box-shadow: $shadow-sm;
-  border: 1px solid $border-light;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: $space-5;
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  gap: $spacing-4;
+  gap: var(--space-2);
   position: relative;
   overflow: hidden;
   min-width: 0;
-  will-change: transform, box-shadow;
 }
 
 .heroCard {
-  background: linear-gradient(145deg, var(--bg-surface) 0%, var(--brand-primary-light) 180%);
-  border-color: rgba(99, 102, 241, 0.2);
-  padding: $spacing-6;
+  border-color: var(--primary-border);
+  padding: $space-6;
 
   .value {
-    font-size: 2.25rem;
-    letter-spacing: -1px;
+    font-size: var(--text-display-xl);
+    letter-spacing: $tracking-tight;
   }
 }
 
 .topRow {
   display: flex;
   align-items: flex-start;
-  gap: $spacing-4;
+  gap: $space-4;
 }
 
 .iconWrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: $radius-md;
-  background: var(--brand-primary-light);
-  color: var(--brand-accent);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--primary-soft);
+  color: var(--primary-text);
   @include flex-center;
   flex-shrink: 0;
 }
@@ -69,48 +65,55 @@
   flex-direction: column;
 
   .label {
-    color: $text-secondary;
-    font-size: 0.85rem;
-    font-weight: 500;
+    color: var(--text-3);
+    font-size: var(--text-caption);
+    font-weight: $weight-medium;
+    letter-spacing: $tracking-wide;
+    @include truncate;
   }
 
   .value {
-    color: $text-primary;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: $spacing-1 0;
-    letter-spacing: -0.5px;
+    font-family: var(--font-display);
+    color: var(--text-1);
+    font-size: 1.75rem;
+    font-weight: $weight-bold;
+    line-height: 1.1;
+    letter-spacing: $tracking-tight;
+    @include tabular-nums;
   }
 
   .trend {
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: var(--text-caption);
+    font-weight: $weight-semibold;
+    @include tabular-nums;
 
-    &.up { color: $status-success; }
-    &.down { color: $status-danger; }
+    &.up { color: var(--success-text); }
+    &.down { color: var(--danger-text); }
   }
 }
 
 .sparkline {
   height: 48px;
   width: 100%;
-  margin-top: auto;
+  margin-top: var(--space-2);
+  margin-inline: calc($space-5 * -1);
+  margin-bottom: calc($space-5 * -1);
 }
 
 .cardFooter {
-  border-top: 1px solid $border-light;
-  padding-top: $spacing-3;
-  margin-top: $spacing-2;
+  border-top: 1px solid var(--border);
+  padding-top: $space-3;
+  margin-top: $space-2;
 }
 
 .linkBtn {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: var(--text-caption);
+  font-weight: $weight-semibold;
   display: flex;
   align-items: center;
-  gap: $spacing-1;
-  transition: opacity 0.2s;
-  color: var(--brand-accent);
+  gap: $space-1;
+  transition: opacity $duration-fast $ease-standard;
+  color: var(--primary);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -125,6 +128,7 @@
   }
 
   .arrow {
-    transition: transform 0.2s;
+    transition: transform $duration-fast $ease-standard;
   }
 }
+

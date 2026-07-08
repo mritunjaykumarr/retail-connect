@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { ClipboardList, Filter, MoreHorizontal, Eye, Check, Printer, RotateCcw } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { FiClipboard, FiFilter, FiMoreHorizontal, FiEye, FiCheck, FiPrinter, FiRotateCcw } from "react-icons/fi";
+import { Table, Badge, Drawer, Button, StatCard, Avatar, Tabs } from "./ui";
 import styles from "./OrderInbox.module.scss";
 
 // Hardcoded data matching screenshot
@@ -15,122 +15,204 @@ const initialOrders = [
 
 export default function OrderInbox() {
   const [activeTab, setActiveTab] = useState("All Orders");
-  const tabs = ["All Orders", "Pending", "Accepted", "In Transit", "Delivered", "Rejected"];
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const tabItems = ["All Orders", "Pending", "Accepted", "In Transit", "Delivered", "Rejected"].map(t => ({ value: t, label: t }));
   const filteredOrders = initialOrders.filter(o => activeTab === "All Orders" || o.status === activeTab);
 
-  const getStatusClass = (status) => {
+  const getStatusTone = (status) => {
     switch(status) {
-      case "Pending": return styles.pending;
-      case "Accepted": return styles.accepted;
-      case "In Transit": return styles.transit;
-      case "Delivered": return styles.delivered;
-      case "Rejected": return styles.rejected;
-      default: return "";
+      case "Pending": return "warning";
+      case "Accepted": return "success";
+      case "In Transit": return "info";
+      case "Delivered": return "success";
+      case "Rejected": return "danger";
+      default: return "neutral";
     }
   };
+
+  const columns = [
+    {
+      key: "id",
+      header: "Order ID",
+      sortable: true,
+      render: (v, row) => (
+        <div className={styles.orderIdStack}>
+          <strong>{v}</strong>
+          {row.isNew && <span className={styles.newBadge}>New</span>}
+        </div>
+      ),
+    },
+    {
+      key: "so",
+      header: "Sales Officer",
+      sortable: true,
+      render: (v, row) => (
+        <div className={styles.soProfile}>
+          <img src={row.avatar} alt={v} className={styles.avatar} />
+          <div className={styles.soInfo}>
+            <span className={styles.soName}>{v}</span>
+            <span className={styles.soZone}>{row.zone}</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "date",
+      header: "Date & Time",
+      sortable: true,
+      render: (v, row) => (
+        <div className={styles.datetime}>
+          <span className={styles.date}>{v}</span>
+          <span className={styles.time}>{row.time}</span>
+        </div>
+      ),
+    },
+    {
+      key: "items",
+      header: "Items",
+      align: "right",
+      mono: true,
+      sortable: true,
+    },
+    {
+      key: "value",
+      header: "Total Value",
+      align: "right",
+      mono: true,
+      sortable: true,
+      render: (v) => <strong>{v}</strong>,
+    },
+    {
+      key: "status",
+      header: "Status",
+      sortable: true,
+      render: (v) => (
+        <Badge tone={getStatusTone(v)} dot>
+          {v}
+        </Badge>
+      ),
+    },
+    {
+      key: "actions",
+      header: "Actions",
+      align: "center",
+      render: (_, row) => (
+        <div className={styles.actions}>
+          <button 
+            className={styles.actionIconBtn}
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedOrder(row);
+            }}
+          >
+            <FiEye size={14} />
+          </button>
+          {row.status === 'Pending' && <button className={styles.actionIconBtn} onClick={(e) => e.stopPropagation()}><FiCheck size={14} /></button>}
+          {(row.status === 'Accepted' || row.status === 'Delivered') && <button className={styles.actionIconBtn} onClick={(e) => e.stopPropagation()}><FiPrinter size={14} /></button>}
+          {row.status === 'In Transit' && <button className={styles.actionIconBtn} onClick={(e) => e.stopPropagation()}><FiPrinter size={14} /></button>}
+          {row.status === 'Rejected' && <button className={styles.actionIconBtn} onClick={(e) => e.stopPropagation()}><FiRotateCcw size={14} /></button>}
+          <button className={styles.actionIconBtn} onClick={(e) => e.stopPropagation()}><FiMoreHorizontal size={14} /></button>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.titleArea}>
           <div className={styles.iconWrapper}>
-            <ClipboardList size={20} strokeWidth={1.5} />
+            <FiClipboard size={20} />
           </div>
           <h3>Order Inbox</h3>
         </div>
         <div className={styles.headerActions}>
           <button className={styles.filterBtn}>
-            Filter <Filter size={14} />
+            Filter <FiFilter size={14} />
           </button>
           <button className={styles.iconBtn}>
-            <MoreHorizontal size={16} />
+            <FiMoreHorizontal size={16} />
           </button>
         </div>
       </div>
       
-      <div className={styles.tabs}>
-        {tabs.map(tab => (
-          <button 
-            key={tab} 
-            className={`${styles.tab} ${activeTab === tab ? styles.activeTab : ""}`}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab}
-          </button>
-        ))}
+      <div className={styles.tabsWrap}>
+        <Tabs
+          items={tabItems}
+          value={activeTab}
+          onChange={setActiveTab}
+          variant="underline"
+          size="sm"
+        />
       </div>
 
-      <div className={styles.table}>
-        <div className={styles.thead}>
-          <div>Order ID</div>
-          <div>Sales Officer</div>
-          <div>Date & Time</div>
-          <div>Items</div>
-          <div>Total Value</div>
-          <div>Status</div>
-          <div className={styles.centerAlign}>Actions</div>
-        </div>
-        
-        <div className={styles.tbody}>
-          <AnimatePresence>
-            {filteredOrders.map((order) => (
-              <motion.div 
-                key={order.id} 
-                className={styles.row}
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                layout
-              >
-                <div className={styles.cell}>
-                  <div className={styles.orderIdStack}>
-                    <strong>{order.id}</strong>
-                    {order.isNew && <span className={styles.newBadge}>New</span>}
-                  </div>
-                </div>
-                
-                <div className={`${styles.cell} ${styles.soProfile}`}>
-                  <img src={order.avatar} alt={order.so} className={styles.avatar} />
-                  <div className={styles.soInfo}>
-                    <span className={styles.soName}>{order.so}</span>
-                    <span className={styles.soZone}>{order.zone}</span>
-                  </div>
-                </div>
+      <Table
+        columns={columns}
+        data={filteredOrders}
+        rowKey={(row) => row.id}
+        pageSize={5}
+        onRowClick={(row) => setSelectedOrder(row)}
+      />
 
-                <div className={styles.cell}>
-                  <div className={styles.datetime}>
-                    <span className={styles.date}>{order.date}</span>
-                    <span className={styles.time}>{order.time}</span>
-                  </div>
-                </div>
+      <Drawer
+        open={!!selectedOrder}
+        onClose={() => setSelectedOrder(null)}
+        title={selectedOrder?.id}
+        description="Verify order items, values, and status."
+        footer={
+          <div style={{ display: "flex", gap: "var(--space-3)", width: "100%", justifyContent: "flex-end" }}>
+            <Button variant="ghost" onClick={() => setSelectedOrder(null)}>
+              Close
+            </Button>
+            {selectedOrder?.status === "Pending" && (
+              <Button onClick={() => setSelectedOrder(null)}>
+                Approve Order
+              </Button>
+            )}
+          </div>
+        }
+      >
+        {selectedOrder && (
+          <div className={styles.drawerBody}>
+            <div className={styles.drawerStats}>
+              <StatCard 
+                label="Invoice value" 
+                value={selectedOrder.value.replace(/[^\d.]/g, '')} 
+                unit="INR" 
+              />
+              <StatCard 
+                label="Total items" 
+                value={selectedOrder.items} 
+                unit="units" 
+              />
+            </div>
 
-                <div className={styles.cell}>{order.items}</div>
-                
-                <div className={styles.cell}><strong>{order.value}</strong></div>
-                
-                <div className={styles.cell}>
-                  <span className={`${styles.statusBadge} ${getStatusClass(order.status)}`}>
-                    {order.status}
-                  </span>
+            <h4 className={styles.drawerSubTitle}>Sales Officer</h4>
+            <ul className={styles.drawerList}>
+              <li>
+                <Avatar name={selectedOrder.so} src={selectedOrder.avatar} size="sm" shape="rounded" />
+                <div className={styles.drawerListText}>
+                  <span>{selectedOrder.so}</span>
+                  <span>{selectedOrder.zone}</span>
                 </div>
+                <Badge tone={getStatusTone(selectedOrder.status)} dot>
+                  {selectedOrder.status}
+                </Badge>
+              </li>
+            </ul>
 
-                <div className={styles.actions}>
-                  <button className={styles.actionIconBtn}><Eye size={14} color="#3b82f6" /></button>
-                  {order.status === 'Pending' && <button className={styles.actionIconBtn}><Check size={14} color="#10b981" /></button>}
-                  {(order.status === 'Accepted' || order.status === 'Delivered') && <button className={styles.actionIconBtn}><Printer size={14} color="#3b82f6" /></button>}
-                  {order.status === 'In Transit' && <button className={styles.actionIconBtn}><Printer size={14} color="#3b82f6" /></button>}
-                  {order.status === 'Rejected' && <button className={styles.actionIconBtn}><RotateCcw size={14} color="#3b82f6" /></button>}
-                  <button className={styles.actionIconBtn}><MoreHorizontal size={14} color="#a0a0a0" /></button>
+            <h4 className={styles.drawerSubTitle}>Metadata</h4>
+            <ul className={styles.drawerList}>
+              <li>
+                <div className={styles.drawerListText}>
+                  <span>Date &amp; Time</span>
+                  <span>{selectedOrder.date} · {selectedOrder.time}</span>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-      </div>
-      
-      <div className={styles.footerRow}>
-        <button className={styles.viewAllBtn}>View All Orders &rarr;</button>
-      </div>
+              </li>
+            </ul>
+          </div>
+        )}
+      </Drawer>
     </div>
   );
 }

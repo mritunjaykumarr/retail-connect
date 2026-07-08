@@ -1,24 +1,24 @@
 "use client";
 import { useState } from "react";
 import { 
-  Home, 
-  ShoppingBag, 
-  Box, 
-  CornerDownLeft, 
-  ArrowLeftRight, 
-  BarChart2, 
-  TrendingUp, 
-  Award,
-  Users,
-  UserCheck,
-  Truck,
-  Bell,
-  FileText,
-  Blocks,
-  Settings,
-  User,
-  Crown
-} from "lucide-react";
+  FiHome, 
+  FiShoppingBag, 
+  FiBox, 
+  FiCornerDownLeft, 
+  FiRepeat, 
+  FiBarChart2, 
+  FiTrendingUp, 
+  FiAward,
+  FiUsers,
+  FiUserCheck,
+  FiTruck,
+  FiBell,
+  FiFileText,
+  FiLayers,
+  FiSettings,
+  FiUser,
+  FiStar
+} from "react-icons/fi";
 import styles from "./Sidebar.module.scss";
 
 export default function Sidebar({ isOpen, closeSidebar }) {
@@ -28,47 +28,47 @@ export default function Sidebar({ isOpen, closeSidebar }) {
     {
       title: null,
       items: [
-        { icon: <Home size={18} strokeWidth={1.5} />, label: "Dashboard" }
+        { icon: <FiHome size={18} />, label: "Dashboard" }
       ]
     },
     {
       title: "OPERATIONS",
       items: [
-        { icon: <ShoppingBag size={18} strokeWidth={1.5} />, label: "Orders", badge: 18 },
-        { icon: <Box size={18} strokeWidth={1.5} />, label: "Inventory" },
-        { icon: <CornerDownLeft size={18} strokeWidth={1.5} />, label: "Returns" },
-        { icon: <ArrowLeftRight size={18} strokeWidth={1.5} />, label: "Stock Transfers" },
+        { icon: <FiShoppingBag size={18} />, label: "Orders", badge: 18 },
+        { icon: <FiBox size={18} />, label: "Inventory" },
+        { icon: <FiCornerDownLeft size={18} />, label: "Returns" },
+        { icon: <FiRepeat size={18} />, label: "Stock Transfers" },
       ]
     },
     {
       title: "ANALYTICS",
       items: [
-        { icon: <BarChart2 size={18} strokeWidth={1.5} />, label: "Sales Analytics" },
-        { icon: <TrendingUp size={18} strokeWidth={1.5} />, label: "Forecast" },
-        { icon: <Award size={18} strokeWidth={1.5} />, label: "Performance" },
+        { icon: <FiBarChart2 size={18} />, label: "Sales Analytics" },
+        { icon: <FiTrendingUp size={18} />, label: "Forecast" },
+        { icon: <FiAward size={18} />, label: "Performance" },
       ]
     },
     {
       title: "MANAGEMENT",
       items: [
-        { icon: <Users size={18} strokeWidth={1.5} />, label: "Officers & Teams" },
-        { icon: <UserCheck size={18} strokeWidth={1.5} />, label: "Customers" },
-        { icon: <Truck size={18} strokeWidth={1.5} />, label: "Suppliers" },
+        { icon: <FiUsers size={18} />, label: "Officers & Teams" },
+        { icon: <FiUserCheck size={18} />, label: "Customers" },
+        { icon: <FiTruck size={18} />, label: "Suppliers" },
       ]
     },
     {
       title: "TOOLS",
       items: [
-        { icon: <Bell size={18} strokeWidth={1.5} />, label: "Notifications", badge: 3 },
-        { icon: <FileText size={18} strokeWidth={1.5} />, label: "Reports" },
-        { icon: <Blocks size={18} strokeWidth={1.5} />, label: "Integrations" },
+        { icon: <FiBell size={18} />, label: "Notifications", badge: 3 },
+        { icon: <FiFileText size={18} />, label: "Reports" },
+        { icon: <FiLayers size={18} />, label: "Integrations" },
       ]
     },
     {
       title: "SETTINGS",
       items: [
-        { icon: <Settings size={18} strokeWidth={1.5} />, label: "Settings" },
-        { icon: <User size={18} strokeWidth={1.5} />, label: "Profile" },
+        { icon: <FiSettings size={18} />, label: "Settings" },
+        { icon: <FiUser size={18} />, label: "Profile" },
       ]
     }
   ];
@@ -111,7 +111,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
       <div className={styles.bottomSection}>
         <div className={styles.premiumCard}>
           <div className={styles.premiumHeader}>
-            <Crown size={20} className={styles.premiumIcon} />
+            <FiStar size={20} className={styles.premiumIcon} />
             <span>Upgrade to Premium</span>
           </div>
           <p>Unlock advanced analytics, custom reports & more.</p>

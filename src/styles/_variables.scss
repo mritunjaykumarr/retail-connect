@@ -1,0 +1,22 @@
+// =============================================================
+// Design tokens — entry point (backwards-compatible)
+// -------------------------------------------------------------
+// The real token definitions now live in _tokens.scss (primitives)
+// and _themes.scss (semantic roles). This file forwards the
+// primitives so existing `@use "variables"` imports keep working,
+// and defines a few legacy color aliases used by earlier code.
+// =============================================================
+
+@forward "tokens";
+@use "tokens" as *;
+
+// ---- Legacy aliases (pre design-system) ---------------------
+// Prefer the semantic CSS custom properties (var(--surface) etc.)
+// in new component code. These remain only so nothing breaks.
+$color-bg: $slate-0;
+$color-surface: $slate-50;
+$color-text: $slate-900;
+$color-text-muted: $slate-500;
+$color-border: $slate-200;
+$color-primary: $cobalt-600;
+$color-primary-hover: $cobalt-700;

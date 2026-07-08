@@ -1,22 +1,20 @@
-@import '../app/variables';
-@import '../app/mixins';
+@use "../styles/mixins" as *;
 
 .sidebar {
   width: 250px;
   height: 100vh;
-  background: $brand-sidebar-bg;
-  color: $sidebar-text;
+  background: var(--surface);
+  color: var(--text-3);
   display: flex;
   flex-direction: column;
-  padding: $spacing-6 $spacing-4;
+  padding: $space-6 $space-4;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 100;
   overflow-y: auto;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-right: 1px solid var(--border);
+  transition: transform $duration-base $ease-emphasized;
   
   @media (max-width: 768px) {
     transform: translateX(-100%);
@@ -35,19 +33,19 @@
 .logoContainer {
   @include flex-center;
   justify-content: flex-start;
-  margin-bottom: $spacing-8;
-  gap: $spacing-3;
-  padding-left: $spacing-2;
+  margin-bottom: $space-8;
+  gap: $space-3;
+  padding-left: $space-2;
 
   .logoMark {
-    background: $brand-primary;
-    color: white;
+    background: var(--primary);
+    color: var(--text-on-accent);
     width: 32px;
     height: 32px;
-    border-radius: $radius-sm;
+    border-radius: var(--radius-sm);
     @include flex-center;
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: var(--text-sm);
+    font-weight: $weight-bold;
   }
 
   .logoText {
@@ -55,34 +53,32 @@
     flex-direction: column;
 
     .brand {
-      color: white;
-      font-weight: 600;
-      font-size: 1.1rem;
+      color: var(--text-1);
+      font-weight: $weight-semibold;
+      font-size: var(--text-lg);
       letter-spacing: 0px;
     }
     .subtitle {
-      font-size: 0.7rem;
-      color: $sidebar-text;
+      font-size: var(--text-caption);
+      color: var(--text-3);
     }
   }
 }
 
-// ... nav styles omitted since they are further up, but this overlaps ... Wait, I should do this as chunks. Let me cancel and target just logoContainer and then premiumCard.
-
 .nav {
   display: flex;
   flex-direction: column;
-  gap: $spacing-6;
+  gap: $space-6;
 }
 
 .navSection {
   .sectionTitle {
-    font-size: 0.65rem;
+    font-size: var(--text-caption);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: $spacing-3;
-    padding-left: $spacing-2;
+    letter-spacing: $tracking-wide;
+    color: var(--text-4);
+    margin-bottom: $space-3;
+    padding-left: $space-2;
   }
 
   ul {
@@ -94,29 +90,29 @@
   li {
     @include flex-center;
     justify-content: space-between;
-    padding: 10px $spacing-3;
-    border-radius: $radius-sm;
-    font-weight: 500;
-    font-size: 0.85rem;
+    padding: 10px $space-3;
+    border-radius: var(--radius-sm);
+    font-weight: $weight-medium;
+    font-size: var(--text-sm);
     cursor: pointer;
-    transition: all 0.2s ease;
-    color: $sidebar-text;
+    transition: all $duration-fast $ease-standard;
+    color: var(--text-3);
     position: relative;
 
     .itemLeft {
       display: flex;
       align-items: center;
-      gap: $spacing-3;
+      gap: $space-3;
     }
 
     &:hover {
-      color: white;
-      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-1);
+      background: var(--surface-hover);
     }
 
     &.active {
-      background: $sidebar-active-bg;
-      color: white;
+      background: var(--surface-active);
+      color: var(--text-1);
       
       &::before {
         content: '';
@@ -125,37 +121,37 @@
         top: 15%;
         bottom: 15%;
         width: 3px;
-        background: $brand-primary;
+        background: var(--primary);
         border-radius: 0 4px 4px 0;
       }
     }
 
     .badge {
-      background-color: $brand-primary;
-      color: white;
-      font-size: 0.65rem;
+      background-color: var(--primary);
+      color: var(--text-on-accent);
+      font-size: var(--text-caption);
       padding: 2px 8px;
-      border-radius: $radius-pill;
-      font-weight: 600;
+      border-radius: var(--radius-pill);
+      font-weight: $weight-semibold;
     }
   }
 }
 
 .bottomSection {
   margin-top: auto;
-  padding-top: $spacing-8;
+  padding-top: $space-8;
   display: flex;
   flex-direction: column;
 }
 
 .premiumCard {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: $radius-lg;
-  padding: $spacing-4;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: $space-4;
   display: flex;
   flex-direction: column;
-  gap: $spacing-3;
+  gap: $space-3;
   position: relative;
   overflow: hidden;
 
@@ -169,7 +165,7 @@
     height: 200%;
     background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity $duration-slow;
   }
   
   &:hover::before {
@@ -179,36 +175,36 @@
   .premiumHeader {
     display: flex;
     align-items: center;
-    gap: $spacing-2;
-    color: white; 
-    font-size: 0.85rem;
-    font-weight: 600;
+    gap: $space-2;
+    color: var(--text-1); 
+    font-size: var(--text-sm);
+    font-weight: $weight-semibold;
 
     .premiumIcon {
-      color: #f9cd48; // Gold
+      color: var(--warning); 
     }
   }
 
   p {
-    font-size: 0.75rem;
-    line-height: 1.4;
-    color: $sidebar-text;
+    font-size: var(--text-caption);
+    line-height: $leading-normal;
+    color: var(--text-3);
   }
 
   .upgradeBtn {
-    background: $brand-primary;
-    color: white;
+    background: var(--primary);
+    color: var(--text-on-accent);
     border: none;
-    padding: $spacing-2 $spacing-4;
-    border-radius: $radius-md;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-top: $spacing-2;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: $space-2 $space-4;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: $weight-semibold;
+    margin-top: $space-2;
+    transition: transform $duration-fast, box-shadow $duration-fast;
 
     &:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+      box-shadow: var(--shadow-sm);
     }
   }
 }

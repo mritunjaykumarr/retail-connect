@@ -1,12 +1,10 @@
-@import '../app/variables';
-@import '../app/mixins';
+@use "../styles/mixins" as *;
 
 .container {
-  background: white;
-  border-radius: $radius-lg;
-  padding: $spacing-5;
-  box-shadow: $shadow-sm;
-  border: 1px solid $border-light;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: $space-5;
+  border: 1px solid var(--border);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -14,56 +12,48 @@
 
 .header {
   @include flex-between;
-  margin-bottom: $spacing-4;
+  margin-bottom: $space-4;
 
   .titleArea {
     display: flex;
     align-items: center;
-    gap: $spacing-3;
+    gap: $space-3;
 
     .iconWrapper {
       width: 32px;
       height: 32px;
-      border-radius: $radius-sm;
-      background: var(--brand-primary-light);
-      color: var(--brand-accent);
+      border-radius: var(--radius-sm);
+      background: var(--primary-soft);
+      color: var(--primary);
       @include flex-center;
     }
 
     h3 {
-      font-size: 1.05rem;
-      color: $text-primary;
-      font-weight: 700;
+      font-size: var(--text-h4);
+      color: var(--text-1);
+      font-weight: $weight-semibold;
       display: flex;
       align-items: center;
-      gap: $spacing-2;
+      gap: $space-2;
     }
 
     .subtitle {
-      font-size: 0.8rem;
-      color: $text-secondary;
-      font-weight: 400;
+      font-size: var(--text-caption);
+      color: var(--text-3);
+      font-weight: $weight-regular;
     }
   }
 
   .dropdown {
-    padding: $spacing-2 $spacing-3;
-    border: 1px solid $border-medium;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: $text-secondary;
-    background: transparent;
-    outline: none;
-    cursor: pointer;
+    min-width: 150px;
   }
 }
 
 .yAxisLabel {
-  font-size: 0.75rem;
-  color: $text-secondary;
-  margin-bottom: $spacing-2;
-  font-weight: 500;
+  font-size: var(--text-caption);
+  color: var(--text-3);
+  margin-bottom: $space-2;
+  font-weight: $weight-medium;
 }
 
 .chartWrapper {

@@ -1,47 +1,22 @@
-@import '../app/variables';
-@import '../app/mixins';
+@use "../styles/mixins" as *;
 
 .quickActionsRow {
   display: flex;
   align-items: center;
-  gap: $spacing-4;
-  margin-bottom: $spacing-6;
+  gap: $space-4;
+  margin-bottom: $space-6;
   flex-wrap: wrap;
+
+  > * {
+    flex: 1;
+    min-width: 140px;
+  }
 }
 
 .actionBtn {
   flex: 1;
   display: flex;
   align-items: center;
-  gap: $spacing-3;
-  padding: $spacing-2 $spacing-4;
-  background: white;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
-  border: 1px solid $border-light;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: $text-primary;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s, border-color 0.3s;
-
-  .iconWrapper {
-    width: 32px;
-    height: 32px;
-    border-radius: $radius-sm;
-    background: var(--bg-surface-hover);
-    color: var(--text-secondary);
-    transition: all 0.2s;
-    @include flex-center;
-  }
-
-  &:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: $shadow-floating;
-    border-color: rgba(99, 102, 241, 0.2); // indigo-500
-    
-    .iconWrapper {
-      background: var(--brand-primary-light);
-      color: var(--brand-accent);
-    }
-  }
+  justify-content: flex-start;
+  gap: $space-3;
 }

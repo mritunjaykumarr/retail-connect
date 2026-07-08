@@ -1,48 +1,92 @@
-@import 'variables';
-@import 'mixins';
+@use "../styles/mixins" as *;
+@use "../styles/themes";
+@use "../styles/reset";
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+html {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
-html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  background-color: var(--bg-canvas);
-  color: $text-primary;
+  background-color: var(--bg);
+  color: var(--text-2);
+  font-size: $text-base;
+  line-height: $leading-normal;
+  font-feature-settings: "cv11" 1; 
+  transition: background-color $duration-base $ease-standard,
+    color $duration-base $ease-standard;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--text-1);
+  font-weight: $weight-semibold;
+  line-height: $leading-snug;
+  letter-spacing: $tracking-snug;
+}
+
+h1 {
+  font-size: $text-h1;
+  line-height: $leading-tight;
+  letter-spacing: $tracking-tight;
+}
+h2 {
+  font-size: $text-h2;
+}
+h3 {
+  font-size: $text-h3;
+}
+h4 {
+  font-size: $text-h4;
+}
+
+p {
+  max-width: 68ch;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--primary-text);
+  transition: color $duration-fast $ease-standard;
+  &:hover {
+    color: var(--primary-hover);
+  }
 }
 
-ul {
-  list-style: none;
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-code);
+  font-size: 0.9em;
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
+::selection {
+  background: var(--primary-soft);
+  color: var(--primary-text);
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ring);
+  border-radius: $radius-xs;
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+:focus:not(:focus-visible) {
+  outline: none;
 }
-::-webkit-scrollbar-thumb {
-  background: $border-medium;
-  border-radius: 4px;
+
+.rc-tnum {
+  @include tabular-nums;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: $text-tertiary;
+.rc-mono {
+  font-family: var(--font-code);
+}
+.rc-sr-only {
+  @include visually-hidden;
 }

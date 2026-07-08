@@ -1,25 +1,28 @@
 "use client";
-import { ClipboardPlus, PlusSquare, ArrowLeftRight, FileText, FileBarChart } from "lucide-react";
+import { FiClipboard, FiPlusSquare, FiRepeat, FiFileText, FiBarChart2 } from "react-icons/fi";
+import { Button } from "./ui";
 import styles from "./QuickActions.module.scss";
 
 export default function QuickActions() {
   const actions = [
-    { label: "Create Order", icon: <ClipboardPlus size={18} strokeWidth={1.5} /> },
-    { label: "Add Inventory", icon: <PlusSquare size={18} strokeWidth={1.5} /> },
-    { label: "Stock Transfer", icon: <ArrowLeftRight size={18} strokeWidth={1.5} /> },
-    { label: "Create Invoice", icon: <FileText size={18} strokeWidth={1.5} /> },
-    { label: "View Reports", icon: <FileBarChart size={18} strokeWidth={1.5} /> },
+    { label: "Create Order", icon: <FiClipboard size={18} /> },
+    { label: "Add Inventory", icon: <FiPlusSquare size={18} /> },
+    { label: "Stock Transfer", icon: <FiRepeat size={18} /> },
+    { label: "Create Invoice", icon: <FiFileText size={18} /> },
+    { label: "View Reports", icon: <FiBarChart2 size={18} /> },
   ];
 
   return (
     <div className={styles.quickActionsRow}>
       {actions.map((action, idx) => (
-        <button key={idx} className={styles.actionBtn}>
-          <div className={styles.iconWrapper}>
-            {action.icon}
-          </div>
-          <span>{action.label}</span>
-        </button>
+        <Button
+          key={idx}
+          variant="subtle"
+          leadingIcon={action.icon}
+          className={styles.actionBtn}
+        >
+          {action.label}
+        </Button>
       ))}
     </div>
   );

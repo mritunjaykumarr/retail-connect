@@ -1,4 +1,4 @@
-@import '../app/variables';
+@use "../styles/mixins" as *;
 
 .layout {
   display: flex;
@@ -21,11 +21,11 @@
 }
 
 .pageContent {
-  padding: 0 $spacing-8 $spacing-8 $spacing-8;
+  padding: 0 $space-8 $space-8 $space-8;
   flex: 1;
 
   @media (max-width: 768px) {
-    padding: 0 $spacing-4 $spacing-4 $spacing-4;
+    padding: 0 $space-4 $space-4 $space-4;
   }
 }
 
@@ -35,9 +35,9 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 90;
-  animation: fadeIn 0.3s ease;
+  background: var(--scrim);
+  z-index: var(--z-overlay);
+  animation: fadeIn $duration-base $ease-standard;
 }
 
 @keyframes fadeIn {

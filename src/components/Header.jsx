@@ -1,4 +1,4 @@
-import { Bell, Search, Grid, ChevronDown } from "lucide-react";
+import { FiBell, FiSearch, FiGrid, FiChevronDown } from "react-icons/fi";
 import styles from "./Header.module.scss";
 
 export default function Header({ toggleSidebar }) {
@@ -6,13 +6,13 @@ export default function Header({ toggleSidebar }) {
     <header className={styles.header}>
       <div className={styles.leftSection}>
         <button className={styles.menuGridBtn} onClick={toggleSidebar}>
-          <Grid size={20} color="#a0a0a0" />
+          <FiGrid size={20} />
         </button>
       </div>
       
       <div className={styles.centerSection}>
         <div className={styles.searchContainer}>
-          <Search size={16} className={styles.searchIcon} color="#a0a0a0" />
+          <FiSearch size={16} className={styles.searchIcon} />
           <input type="text" placeholder="Search orders, items, officers, invoices..." />
           <div className={styles.shortcutKey}>⌘K</div>
         </div>
@@ -20,7 +20,7 @@ export default function Header({ toggleSidebar }) {
         
       <div className={styles.rightSection}>
         <button className={styles.notificationBtn}>
-          <Bell size={20} color="#1e1e1e" />
+          <FiBell size={20} />
           <span className={styles.badge}>3</span>
         </button>
         
@@ -30,7 +30,7 @@ export default function Header({ toggleSidebar }) {
             <span className={styles.name}>Aman Verma</span>
             <span className={styles.role}>Distributor</span>
           </div>
-          <ChevronDown size={16} color="#757575" className={styles.chevron} />
+          <FiChevronDown size={16} className={styles.chevron} />
         </div>
       </div>
     </header>

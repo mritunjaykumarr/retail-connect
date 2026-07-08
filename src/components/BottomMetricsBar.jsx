@@ -1,5 +1,5 @@
 "use client";
-import { ArrowUp, ArrowDown } from "lucide-react";
+import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 import styles from "./BottomMetricsBar.module.scss";
 
 export default function BottomMetricsBar() {
@@ -18,7 +18,7 @@ export default function BottomMetricsBar() {
           <div className={styles.valueRow}>
             <span className={styles.value}>{metric.value}</span>
             <div className={`${styles.trend} ${metric.isPositive ? styles.positive : styles.negative}`}>
-              {metric.isPositive ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
+              {metric.isPositive ? <FiArrowUp size={12} /> : <FiArrowDown size={12} />}
               {metric.trend}
             </div>
           </div>

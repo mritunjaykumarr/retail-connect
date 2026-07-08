@@ -1,15 +1,13 @@
 "use client";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ShoppingBag, Box, IndianRupee, PackageX, ArrowRight } from "lucide-react";
-import { LineChart, Line, ResponsiveContainer } from 'recharts';
+import { FiShoppingBag, FiBox, FiDollarSign, FiXCircle, FiArrowRight } from "react-icons/fi";
+import { Sparkline } from "./ui";
 import styles from "./KPICards.module.scss";
 
 export default function KPICards() {
-  const cardsRef = useRef([]);
-
   useEffect(() => {
-    // Number counter animation (simplified for demonstration)
+    // Number counter animation
     const counters = document.querySelectorAll('.counter-val');
     counters.forEach(counter => {
       const target = parseFloat(counter.getAttribute('data-val'));
@@ -29,30 +27,10 @@ export default function KPICards() {
     });
   }, []);
 
-  const handleMouseEnter = (idx) => {
-    gsap.to(cardsRef.current[idx], {
-      y: -5,
-      scale: 1.02,
-      boxShadow: "0 15px 35px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0, 0, 0, 0.03)", // floating shadow
-      duration: 0.4,
-      ease: "back.out(1.5)"
-    });
-  };
-
-  const handleMouseLeave = (idx) => {
-    gsap.to(cardsRef.current[idx], {
-      y: 0,
-      scale: 1,
-      boxShadow: "0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.01)", // sm shadow
-      duration: 0.3,
-      ease: "power2.out"
-    });
-  };
-
   const heroCard = {
     key: "pendingOrders", 
     label: "Pending Orders", 
-    icon: <ShoppingBag size={24} strokeWidth={1.5} />, 
+    icon: <FiShoppingBag size={24} />, 
     rawVal: 18,
     prefix: "",
     suffix: "",
@@ -60,6 +38,7 @@ export default function KPICards() {
     trend: "+4 from yesterday",
     trendUp: true,
     linkText: "View Orders",
+    color: "var(--primary)",
     data: [12, 14, 13, 16, 15, 18, 17, 19, 18]
   };
 
@@ -67,7 +46,7 @@ export default function KPICards() {
     { 
       key: "totalValue", 
       label: "Total Value (Orders)", 
-      icon: <IndianRupee size={20} strokeWidth={1.5} />, 
+      icon: <FiDollarSign size={20} />, 
       rawVal: 4.82,
       prefix: "₹ ",
       suffix: " L",
@@ -75,12 +54,13 @@ export default function KPICards() {
       trend: "+12.5%",
       trendUp: true,
       linkText: "View Analytics",
+      color: "var(--success)",
       data: [4.1, 4.2, 4.15, 4.4, 4.3, 4.6, 4.5, 4.7, 4.82]
     },
     { 
       key: "lowStock", 
       label: "Low Stock Items", 
-      icon: <Box size={20} strokeWidth={1.5} />, 
+      icon: <FiBox size={20} />, 
       rawVal: 12,
       prefix: "",
       suffix: "",
@@ -88,12 +68,13 @@ export default function KPICards() {
       trend: "-2",
       trendUp: false,
       linkText: "View Inventory",
+      color: "var(--warning)",
       data: [20, 18, 19, 15, 14, 16, 13, 11, 12]
     },
     { 
       key: "outOfStock", 
       label: "Out of Stock", 
-      icon: <PackageX size={20} strokeWidth={1.5} />, 
+      icon: <FiXCircle size={20} />, 
       rawVal: 4,
       prefix: "",
       suffix: "",
@@ -101,22 +82,16 @@ export default function KPICards() {
       trend: "+1",
       trendUp: false,
       linkText: "View Items",
+      color: "var(--danger)",
       data: [2, 3, 2, 4, 3, 5, 4, 3, 4]
     },
   ];
 
-  const getColorHex = () => '#6366f1'; // Unified indigo accent
-
   const renderCard = (card, idx, isHero) => {
-    const sparklineData = card.data.map((val, i) => ({ index: i, value: val }));
-    
     return (
       <div 
         key={idx} 
-        ref={el => cardsRef.current[idx] = el}
         className={`${styles.card} ${isHero ? styles.heroCard : ''}`}
-        onMouseEnter={() => handleMouseEnter(idx)}
-        onMouseLeave={() => handleMouseLeave(idx)}
       >
         <div className={styles.topRow}>
           <div className={styles.iconWrapper}>
@@ -139,23 +114,16 @@ export default function KPICards() {
         </div>
         
         <div className={styles.sparkline}>
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={sparklineData}>
-              <Line 
-                type="monotone" 
-                dataKey="value" 
-                stroke={getColorHex()} 
-                strokeWidth={isHero ? 3 : 2} 
-                dot={false}
-                isAnimationActive={true}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+          <Sparkline
+            data={card.data}
+            color={card.color}
+            height={48}
+          />
         </div>
 
         <div className={styles.cardFooter}>
           <button className={styles.linkBtn}>
-            {card.linkText} <ArrowRight size={14} className={styles.arrow} />
+            {card.linkText} <FiArrowRight size={14} className={styles.arrow} />
           </button>
         </div>
       </div>
