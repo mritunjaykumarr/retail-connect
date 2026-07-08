@@ -9,6 +9,7 @@ import StockForecastChart from "../components/StockForecastChart";
 import InventoryOverview from "../components/InventoryOverview";
 import BottomMetricsBar from "../components/BottomMetricsBar";
 import InventoryUpload from "../components/InventoryUpload";
+import OrdersManagement from "../components/OrdersManagement";
 import { Modal, Button, Input, Checkbox, useToast } from "../components/ui";
 import { FiPlus, FiCalendar, FiChevronDown } from "react-icons/fi";
 import styles from "./page.module.scss";
@@ -54,6 +55,8 @@ export default function Home() {
   const handleQuickAction = (actionKey) => {
     if (actionKey === "addInventory") {
       setActiveTab("Inventory");
+    } else if (actionKey === "createOrder") {
+      setActiveTab("Orders");
     } else {
       toast.info("Feature in development", {
         description: `The "${actionKey}" action will be available in the next release.`
@@ -117,6 +120,12 @@ export default function Home() {
         {activeTab === "Inventory" && (
           <div className="animate-item">
             <InventoryUpload onBackToDashboard={() => setActiveTab("Dashboard")} />
+          </div>
+        )}
+
+        {activeTab === "Orders" && (
+          <div className="animate-item">
+            <OrdersManagement onBackToDashboard={() => setActiveTab("Dashboard")} />
           </div>
         )}
       </div>

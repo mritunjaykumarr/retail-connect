@@ -51,6 +51,7 @@ export default function Avatar({
           className="rc-avatar__img"
           src={src}
           alt={name}
+          loading="lazy"
           onError={() => setBroken(true)}
         />
       ) : (

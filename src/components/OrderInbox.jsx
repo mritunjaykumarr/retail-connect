@@ -48,7 +48,7 @@ export default function OrderInbox() {
       sortable: true,
       render: (v, row) => (
         <div className={styles.soProfile}>
-          <img src={row.avatar} alt={v} className={styles.avatar} />
+          <Avatar name={v} src={row.avatar} size="sm" shape="rounded" />
           <div className={styles.soInfo}>
             <span className={styles.soName}>{v}</span>
             <span className={styles.soZone}>{row.zone}</span>

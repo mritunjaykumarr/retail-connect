@@ -25,7 +25,7 @@ export default function Header({ toggleSidebar }) {
         </button>
         
         <div className={styles.profile}>
-          <img src="https://i.pravatar.cc/150?u=aman" alt="Aman Verma" className={styles.avatar} />
+          <img src="https://i.pravatar.cc/150?u=aman" alt="Aman Verma" className={styles.avatar} loading="lazy" />
           <div className={styles.userInfo}>
             <span className={styles.name}>Aman Verma</span>
             <span className={styles.role}>Distributor</span>
