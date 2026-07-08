@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import styles from "./DashboardLayout.module.scss";
 
-export default function DashboardLayout({ children }) {
+export default function DashboardLayout({ children, activeTab, setActiveTab }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -13,7 +13,12 @@ export default function DashboardLayout({ children }) {
 
   return (
     <div className={styles.layout}>
-      <Sidebar isOpen={isSidebarOpen} closeSidebar={() => setIsSidebarOpen(false)} />
+      <Sidebar 
+        isOpen={isSidebarOpen} 
+        closeSidebar={() => setIsSidebarOpen(false)} 
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
       <main className={styles.mainContent}>
         <Header toggleSidebar={toggleSidebar} />
         <div className={styles.pageContent}>

@@ -21,8 +21,7 @@ import {
 } from "react-icons/fi";
 import styles from "./Sidebar.module.scss";
 
-export default function Sidebar({ isOpen, closeSidebar }) {
-  const [activeTab, setActiveTab] = useState("Dashboard");
+export default function Sidebar({ isOpen, closeSidebar, activeTab, setActiveTab }) {
 
   const menuSections = [
     {
