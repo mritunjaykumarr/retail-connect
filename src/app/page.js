@@ -10,6 +10,7 @@ import InventoryOverview from "../components/InventoryOverview";
 import BottomMetricsBar from "../components/BottomMetricsBar";
 import InventoryUpload from "../components/InventoryUpload";
 import OrdersManagement from "../components/OrdersManagement";
+import ReturnsManagement from "../components/ReturnsManagement";
 import { Modal, Button, Input, Checkbox, useToast } from "../components/ui";
 import { FiPlus, FiCalendar, FiChevronDown } from "react-icons/fi";
 import styles from "./page.module.scss";
@@ -126,6 +127,12 @@ export default function Home() {
         {activeTab === "Orders" && (
           <div className="animate-item">
             <OrdersManagement onBackToDashboard={() => setActiveTab("Dashboard")} />
+          </div>
+        )}
+
+        {activeTab === "Returns" && (
+          <div className="animate-item">
+            <ReturnsManagement onBackToDashboard={() => setActiveTab("Dashboard")} />
           </div>
         )}
       </div>
