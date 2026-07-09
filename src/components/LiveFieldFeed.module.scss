@@ -1,0 +1,83 @@
+@use "../styles/mixins" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  @include flex-between;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--border);
+
+  .titleArea {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    
+    .iconWrapper {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+      background: var(--primary-soft);
+      color: var(--primary-text);
+      @include flex-center;
+    }
+
+    h3 {
+      font-size: var(--text-h4);
+      color: var(--text-1);
+      font-weight: 600;
+    }
+  }
+}
+
+.liveIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--success);
+  text-transform: uppercase;
+  letter-spacing: $tracking-wide;
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 24%, transparent);
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.bodyPaddingNone {
+  padding: 0 !important;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  
+  strong {
+    font-size: var(--text-sm);
+    color: var(--text-1);
+    font-weight: 600;
+  }
+}
+
+.shopLocation {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-sm);
+  color: var(--text-2);
+}

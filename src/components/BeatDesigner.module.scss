@@ -1,0 +1,312 @@
+@use "../styles/mixins" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  
+  .headerTitle {
+    h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-h2);
+      font-weight: 600;
+      color: var(--text-1);
+    }
+    p {
+      margin-top: 4px;
+      font-size: var(--text-sm);
+      color: var(--text-3);
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.toggleGroup {
+  display: flex;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  padding: 2px;
+  border-radius: var(--radius-md);
+}
+
+.toggleBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text-3);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all $duration-base $ease-standard;
+  
+  &:hover {
+    color: var(--text-1);
+  }
+  
+  &.active {
+    background: var(--surface);
+    color: var(--text-1);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.bodyPaddingNone {
+  padding: 0 !important;
+}
+
+// Map Workspace layout
+.mapWorkspace {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-6);
+  height: 520px;
+  
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+.mapContainer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  min-height: 400px;
+}
+
+.mapPlaceholder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: var(--surface-sunken);
+}
+
+.mapGridBackground {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.7;
+}
+
+.routeOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.routeSvg {
+  width: 100%;
+  height: 100%;
+}
+
+// Mock Map pin tags
+.pin {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  
+  .pinDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid var(--surface);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 20%, transparent);
+    transition: transform 0.2s ease;
+  }
+  
+  .pinLabel {
+    margin-top: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-overline);
+    font-weight: 600;
+    color: var(--text-1);
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+  }
+  
+  &:hover {
+    .pinDot {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.pin1 { top: 180px; left: 220px; }
+.pin2 { top: 320px; left: 400px; }
+.pin3 { top: 120px; left: 520px; }
+
+.mapLegend {
+  position: absolute;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 200px;
+  
+  h4 {
+    font-size: var(--text-caption);
+    font-weight: 600;
+    color: var(--text-1);
+    margin-bottom: 2px;
+  }
+}
+
+.legendRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-overline);
+  color: var(--text-2);
+  
+  .legendLine {
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+  }
+}
+
+.sidePanel {
+  height: 100%;
+  
+  h3 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-1);
+    margin-bottom: var(--space-3);
+  }
+}
+
+.beatList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow-y: auto;
+  max-height: 420px;
+  padding-right: 4px;
+  
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    background: var(--surface-sunken);
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: var(--surface-hover);
+      border-color: var(--border);
+    }
+    
+    &.selected {
+      background: var(--primary-soft);
+      border-color: color-mix(in srgb, var(--primary) 20%, transparent);
+    }
+  }
+}
+
+.beatInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  
+  strong {
+    font-size: var(--text-sm);
+    color: var(--text-1);
+  }
+  
+  span {
+    font-size: var(--text-overline);
+    color: var(--text-3);
+  }
+}
+
+// Drawer inside configuration
+.drawerContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.drawerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.drawerTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: $tracking-wide;
+  color: var(--text-3);
+  margin-top: var(--space-4);
+}
+
+.soSelectionCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-subtle);
+}
+
+.soDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  
+  strong {
+    font-size: var(--text-sm);
+    color: var(--text-1);
+  }
+  
+  span {
+    font-size: var(--text-overline);
+    color: var(--text-3);
+  }
+}

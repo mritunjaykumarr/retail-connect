@@ -1,7 +1,11 @@
+import { usePathname } from "next/navigation";
 import { FiBell, FiSearch, FiGrid, FiChevronDown } from "react-icons/fi";
 import styles from "./Header.module.scss";
 
 export default function Header({ toggleSidebar }) {
+  const pathname = usePathname();
+  const isManager = pathname && pathname.startsWith("/manager");
+
   return (
     <header className={styles.header}>
       <div className={styles.leftSection}>
@@ -25,10 +29,15 @@ export default function Header({ toggleSidebar }) {
         </button>
         
         <div className={styles.profile}>
-          <img src="https://i.pravatar.cc/150?u=aman" alt="Aman Verma" className={styles.avatar} loading="lazy" />
+          <img 
+            src={isManager ? "https://i.pravatar.cc/150?u=arkalal" : "https://i.pravatar.cc/150?u=aman"} 
+            alt={isManager ? "Arkalal Chakravarty" : "Aman Verma"} 
+            className={styles.avatar} 
+            loading="lazy" 
+          />
           <div className={styles.userInfo}>
-            <span className={styles.name}>Aman Verma</span>
-            <span className={styles.role}>Distributor</span>
+            <span className={styles.name}>{isManager ? "Arkalal Chakravarty" : "Aman Verma"}</span>
+            <span className={styles.role}>{isManager ? "Area Sales Manager" : "Distributor"}</span>
           </div>
           <FiChevronDown size={16} className={styles.chevron} />
         </div>

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { 
   FiHome, 
   FiShoppingBag, 
@@ -22,8 +23,10 @@ import {
 import styles from "./Sidebar.module.scss";
 
 export default function Sidebar({ isOpen, closeSidebar, activeTab, setActiveTab }) {
+  const pathname = usePathname();
+  const isManager = pathname && pathname.startsWith("/manager");
 
-  const menuSections = [
+  const distributorSections = [
     {
       title: null,
       items: [
@@ -72,13 +75,52 @@ export default function Sidebar({ isOpen, closeSidebar, activeTab, setActiveTab 
     }
   ];
 
+  const managerSections = [
+    {
+      title: null,
+      items: [
+        { icon: <FiHome size={18} />, label: "Dashboard" }
+      ]
+    },
+    {
+      title: "FIELD SALES",
+      items: [
+        { icon: <FiLayers size={18} />, label: "Beat Designer" },
+        { icon: <FiUserCheck size={18} />, label: "Field Monitoring", badge: "Live" },
+      ]
+    },
+    {
+      title: "TRADE PROGRAMS",
+      items: [
+        { icon: <FiShoppingBag size={18} />, label: "Scheme Builder", badge: 4 },
+        { icon: <FiAward size={18} />, label: "Incentive Planner" },
+      ]
+    },
+    {
+      title: "ANALYTICS",
+      items: [
+        { icon: <FiBarChart2 size={18} />, label: "Sales Analytics" },
+        { icon: <FiTrendingUp size={18} />, label: "Offer Performance" },
+      ]
+    },
+    {
+      title: "SETTINGS",
+      items: [
+        { icon: <FiSettings size={18} />, label: "Settings" },
+        { icon: <FiUser size={18} />, label: "Profile" },
+      ]
+    }
+  ];
+
+  const menuSections = isManager ? managerSections : distributorSections;
+
   return (
     <aside className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
       <div className={styles.logoContainer}>
         <div className={styles.logoMark}>RC</div>
         <div className={styles.logoText}>
           <span className={styles.brand}>RetailConnect</span>
-          <span className={styles.subtitle}>Distributor Portal</span>
+          <span className={styles.subtitle}>{isManager ? "Manager Portal" : "Distributor Portal"}</span>
         </div>
       </div>
       
