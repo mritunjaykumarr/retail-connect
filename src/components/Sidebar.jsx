@@ -24,7 +24,7 @@ import styles from "./Sidebar.module.scss";
 
 export default function Sidebar({ isOpen, closeSidebar, activeTab, setActiveTab }) {
   const pathname = usePathname();
-  const isManager = pathname && pathname.startsWith("/manager");
+  const isManager = pathname && (pathname.startsWith("/manager") || pathname.startsWith("/retailconnect-manager"));
 
   const distributorSections = [
     {

@@ -4,7 +4,7 @@ import styles from "./Header.module.scss";
 
 export default function Header({ toggleSidebar }) {
   const pathname = usePathname();
-  const isManager = pathname && pathname.startsWith("/manager");
+  const isManager = pathname && (pathname.startsWith("/manager") || pathname.startsWith("/retailconnect-manager"));
 
   return (
     <header className={styles.header}>
