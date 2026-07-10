@@ -43,59 +43,67 @@
 }
 
 .searchContainer {
+  position: relative;
   display: flex;
   align-items: center;
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  width: 480px;
+  width: 100%;
+  max-width: 480px;
   height: 38px;
-  border: 1px solid var(--border);
-  transition: border-color $duration-base $ease-standard;
-  padding-left: var(--space-3);
-
-  &:focus-within {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 12%, transparent);
-  }
 
   .searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     color: var(--text-4);
-    margin-right: var(--space-2);
-    flex-shrink: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .shortcutKey {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--surface-sunken);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xs);
+    padding: 2px 6px;
+    font-size: var(--text-caption);
+    font-weight: $weight-semibold;
+    color: var(--text-3);
+    letter-spacing: 1px;
+    z-index: 1;
+    pointer-events: none;
   }
 
   input {
-    flex: 1;
+    width: 100%;
     height: 100%;
-    border: none;
-    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
     color: var(--text-1);
     font-size: var(--text-sm);
     outline: none;
-    padding-left: var(--space-1);
-    padding-right: var(--space-4);
-    min-width: 0;
+    padding-left: 36px;
+    padding-right: 48px;
+    transition: border-color $duration-base $ease-standard,
+      box-shadow $duration-base $ease-standard;
 
     &::placeholder {
       color: var(--text-4);
+    }
+
+    &:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 12%, transparent);
     }
   }
 
   @media (max-width: 768px) {
     display: none;
   }
-}
-
-.shortcutKey {
-  background: var(--surface-sunken);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
-  padding: 2px 6px;
-  font-size: var(--text-caption);
-  font-weight: $weight-semibold;
-  color: var(--text-3);
-  letter-spacing: 1px;
-  margin-right: $space-2;
 }
 
 .rightSection {
