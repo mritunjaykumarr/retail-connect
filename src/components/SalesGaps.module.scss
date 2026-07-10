@@ -1,0 +1,240 @@
+@use "../styles/mixins" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+}
+
+.alertPanel {
+  background: color-mix(in srgb, var(--warning) 6%, transparent);
+  border-left: 4px solid var(--warning);
+  border-radius: var(--radius-md);
+  padding: $space-4 $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  .alertHeader {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    color: var(--warning);
+    font-weight: $weight-bold;
+  }
+
+  p {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--text-2);
+  }
+}
+
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-4;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 380px;
+  height: 38px;
+
+  .searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-4);
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--text-1);
+    font-size: var(--text-sm);
+    outline: none;
+    padding-left: 36px;
+    padding-right: var(--space-4);
+    transition: border-color $duration-base $ease-standard,
+      box-shadow $duration-base $ease-standard;
+
+    &:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 12%, transparent);
+    }
+  }
+}
+
+.filterMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 180px;
+  height: 38px;
+
+  .selectInput {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--text-2);
+    font-size: var(--text-sm);
+    padding-left: $space-3;
+    padding-right: $space-8;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition: border-color $duration-fast $ease-standard;
+
+    &:hover {
+      border-color: var(--border-strong);
+    }
+
+    &:focus {
+      border-color: var(--primary);
+    }
+  }
+
+  .chevron {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-3);
+    pointer-events: none;
+  }
+}
+
+.tableWrapper {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  thead {
+    background: var(--surface-sunken);
+    border-bottom: 1px solid var(--border);
+
+    th {
+      height: 40px;
+      padding: 0 $space-4;
+      font-size: var(--text-caption);
+      font-weight: $weight-semibold;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: $tracking-wide;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color $duration-fast $ease-standard;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: var(--surface-hover);
+      }
+    }
+
+    td {
+      height: 48px;
+      padding: 0 $space-4;
+      font-size: var(--text-sm);
+      color: var(--text-2);
+    }
+  }
+}
+
+.territoryName {
+  font-weight: $weight-semibold;
+  color: var(--text-1);
+}
+
+.numberCell {
+  font-family: var(--font-code);
+  @include tabular-nums;
+}
+
+.gapAmount {
+  color: var(--text-1);
+  font-weight: $weight-semibold;
+}
+
+.positive {
+  color: var(--success);
+}
+
+.negative {
+  color: var(--danger);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.trendArrow {
+  flex-shrink: 0;
+}
+
+.statusBadge {
+  font-size: var(--text-caption);
+  font-weight: $weight-bold;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &.success {
+    background: color-mix(in srgb, var(--success) 8%, transparent);
+    color: var(--success);
+  }
+
+  &.warning {
+    background: color-mix(in srgb, var(--warning) 8%, transparent);
+    color: var(--warning);
+  }
+
+  &.danger {
+    background: color-mix(in srgb, var(--danger) 8%, transparent);
+    color: var(--danger);
+  }
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.emptyCell {
+  text-align: center;
+  color: var(--text-3);
+  font-style: italic;
+}

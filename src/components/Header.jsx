@@ -5,6 +5,21 @@ import styles from "./Header.module.scss";
 export default function Header({ toggleSidebar }) {
   const pathname = usePathname();
   const isManager = pathname && (pathname.startsWith("/manager") || pathname.startsWith("/retailconnect-manager"));
+  const isManagement = pathname && (pathname.startsWith("/management") || pathname.startsWith("/retailconnect-management"));
+
+  let avatarUrl = "https://i.pravatar.cc/150?u=aman";
+  let profileName = "Aman Verma";
+  let profileRole = "Distributor";
+
+  if (isManager) {
+    avatarUrl = "https://i.pravatar.cc/150?u=arkalal";
+    profileName = "Arkalal Chakravarty";
+    profileRole = "Area Sales Manager";
+  } else if (isManagement) {
+    avatarUrl = "https://i.pravatar.cc/150?u=siddharth";
+    profileName = "Siddharth Mehta";
+    profileRole = "GM & National Head";
+  }
 
   return (
     <header className={styles.header}>
@@ -30,14 +45,14 @@ export default function Header({ toggleSidebar }) {
         
         <div className={styles.profile}>
           <img 
-            src={isManager ? "https://i.pravatar.cc/150?u=arkalal" : "https://i.pravatar.cc/150?u=aman"} 
-            alt={isManager ? "Arkalal Chakravarty" : "Aman Verma"} 
+            src={avatarUrl} 
+            alt={profileName} 
             className={styles.avatar} 
             loading="lazy" 
           />
           <div className={styles.userInfo}>
-            <span className={styles.name}>{isManager ? "Arkalal Chakravarty" : "Aman Verma"}</span>
-            <span className={styles.role}>{isManager ? "Area Sales Manager" : "Distributor"}</span>
+            <span className={styles.name}>{profileName}</span>
+            <span className={styles.role}>{profileRole}</span>
           </div>
           <FiChevronDown size={16} className={styles.chevron} />
         </div>

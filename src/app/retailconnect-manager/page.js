@@ -9,7 +9,7 @@ import BeatDesigner from "../../components/BeatDesigner";
 import FieldMonitoring from "../../components/FieldMonitoring";
 import SchemeBuilder from "../../components/SchemeBuilder";
 import IncentivePlanner from "../../components/IncentivePlanner";
-import { Modal, Button, Input, Checkbox, useToast } from "../../components/ui";
+import { Modal, Button, Input, Checkbox, useToast, Breadcrumbs } from "../../components/ui";
 import { FiPlus, FiCalendar, FiChevronDown } from "react-icons/fi";
 import styles from "./page.module.scss";
 
@@ -54,6 +54,18 @@ export default function Home() {
   return (
     <DashboardLayout activeTab={activeTab} setActiveTab={setActiveTab}>
       <div ref={containerRef} className={styles.dashboardContainer}>
+        {activeTab !== "Dashboard" && (
+          <div className="animate-item" style={{ marginBottom: "calc(-1 * var(--space-2))" }}>
+            <Breadcrumbs
+              items={[
+                { label: "Dashboard", onClick: () => setActiveTab("Dashboard") },
+                { label: activeTab === "Beat Designer" || activeTab === "Field Monitoring" ? "Field Sales" : "Trade Programs" },
+                { label: activeTab }
+              ]}
+            />
+          </div>
+        )}
+
         {activeTab === "Dashboard" && (
           <>
             <div className={`${styles.pageHeader} animate-item`}>

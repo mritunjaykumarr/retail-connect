@@ -1,0 +1,121 @@
+@use "../../styles/mixins" as *;
+
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+}
+
+.pageHeader {
+  @include flex-between;
+  flex-wrap: wrap;
+  gap: $space-4;
+
+  .greeting {
+    h1 {
+      font-size: var(--text-h2);
+      font-weight: $weight-bold;
+      color: var(--text-1);
+      margin-bottom: $space-1;
+      display: flex;
+      align-items: center;
+      gap: $space-2;
+      flex-wrap: wrap;
+      
+      .highlight {
+        color: var(--primary);
+      }
+    }
+    
+    p {
+      color: var(--text-2);
+      font-size: var(--text-sm);
+    }
+  }
+
+  .headerActions {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    flex-wrap: wrap;
+  }
+
+  .newOrderBtn {
+    background: var(--primary);
+    color: var(--text-on-accent);
+    padding: $space-2 $space-4;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    font-size: var(--text-sm);
+    font-weight: $weight-semibold;
+    border: none;
+    cursor: pointer;
+    transition: background-color $duration-fast $ease-standard;
+
+    &:hover {
+      background: color-mix(in srgb, var(--primary) 90%, black);
+    }
+
+    .divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .datePicker {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    background: var(--surface);
+    padding: $space-2 $space-4;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    font-size: var(--text-sm);
+    font-weight: $weight-semibold;
+    color: var(--text-1);
+    cursor: pointer;
+
+    &:hover {
+      background: var(--surface-hover);
+    }
+  }
+}
+
+.dropdown {
+  width: 100%;
+  height: 38px;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-1);
+  font-size: var(--text-sm);
+  outline: none;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 12%, transparent);
+  }
+}
+
+.modalInput {
+  width: 100%;
+  height: 38px;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-1);
+  font-size: var(--text-sm);
+  outline: none;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 12%, transparent);
+  }
+}

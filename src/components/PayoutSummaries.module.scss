@@ -1,0 +1,193 @@
+@use "../styles/mixins" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-6;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+
+  .label {
+    font-size: var(--text-caption);
+    color: var(--text-3);
+    font-weight: $weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .value {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: $weight-bold;
+    color: var(--text-1);
+    @include tabular-nums;
+  }
+}
+
+.tableWrapper {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  thead {
+    background: var(--surface-sunken);
+    border-bottom: 1px solid var(--border);
+
+    th {
+      height: 40px;
+      padding: 0 $space-4;
+      font-size: var(--text-caption);
+      font-weight: $weight-semibold;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: $tracking-wide;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color $duration-fast $ease-standard;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: var(--surface-hover);
+      }
+    }
+
+    td {
+      height: 48px;
+      padding: 0 $space-4;
+      font-size: var(--text-sm);
+      color: var(--text-2);
+    }
+  }
+}
+
+.claimantCell {
+  display: flex;
+  flex-direction: column;
+  
+  .name {
+    font-weight: $weight-semibold;
+    color: var(--text-1);
+    font-size: var(--text-sm);
+  }
+
+  .role {
+    font-size: var(--text-caption);
+    color: var(--text-3);
+  }
+}
+
+.numberCell {
+  font-family: var(--font-code);
+  @include tabular-nums;
+  font-weight: $weight-semibold;
+  color: var(--text-1);
+}
+
+.statusBadge {
+  font-size: var(--text-caption);
+  font-weight: $weight-bold;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &.success {
+    background: color-mix(in srgb, var(--success) 8%, transparent);
+    color: var(--success);
+  }
+
+  &.warning {
+    background: color-mix(in srgb, var(--warning) 8%, transparent);
+    color: var(--warning);
+  }
+
+  &.pending {
+    background: color-mix(in srgb, var(--primary) 8%, transparent);
+    color: var(--primary);
+  }
+}
+
+.actionsCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $space-2;
+}
+
+.approveBtn, .holdBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  @include flex-center;
+  cursor: pointer;
+  transition: background $duration-fast $ease-standard,
+    color $duration-fast $ease-standard;
+}
+
+.approveBtn {
+  border: 1px solid var(--border);
+  color: var(--success);
+  background: var(--surface);
+
+  &:hover {
+    background: color-mix(in srgb, var(--success) 8%, transparent);
+    border-color: var(--success);
+  }
+}
+
+.holdBtn {
+  border: 1px solid var(--border);
+  color: var(--danger);
+  background: var(--surface);
+
+  &:hover {
+    background: color-mix(in srgb, var(--danger) 8%, transparent);
+    border-color: var(--danger);
+  }
+}
+
+.completedText {
+  font-size: var(--text-caption);
+  color: var(--text-3);
+  font-weight: $weight-semibold;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.alignCenter {
+  text-align: center;
+}

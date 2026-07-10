@@ -18,13 +18,15 @@ import {
   FiLayers,
   FiSettings,
   FiUser,
-  FiStar
+  FiStar,
+  FiDollarSign
 } from "react-icons/fi";
 import styles from "./Sidebar.module.scss";
 
 export default function Sidebar({ isOpen, closeSidebar, activeTab, setActiveTab }) {
   const pathname = usePathname();
   const isManager = pathname && (pathname.startsWith("/manager") || pathname.startsWith("/retailconnect-manager"));
+  const isManagement = pathname && (pathname.startsWith("/management") || pathname.startsWith("/retailconnect-management"));
 
   const distributorSections = [
     {
@@ -112,7 +114,45 @@ export default function Sidebar({ isOpen, closeSidebar, activeTab, setActiveTab 
     }
   ];
 
-  const menuSections = isManager ? managerSections : distributorSections;
+  const managementSections = [
+    {
+      title: null,
+      items: [
+        { icon: <FiHome size={18} />, label: "Dashboard" }
+      ]
+    },
+    {
+      title: "PERFORMANCE",
+      items: [
+        { icon: <FiLayers size={18} />, label: "Sales Gaps" },
+        { icon: <FiStar size={18} />, label: "Leaderboards" },
+      ]
+    },
+    {
+      title: "FINANCE & ROI",
+      items: [
+        { icon: <FiTrendingUp size={18} />, label: "ROI Tracker" },
+        { icon: <FiDollarSign size={18} />, label: "Payout Summaries" },
+      ]
+    },
+    {
+      title: "SETTINGS",
+      items: [
+        { icon: <FiSettings size={18} />, label: "Settings" },
+        { icon: <FiUser size={18} />, label: "Profile" },
+      ]
+    }
+  ];
+
+  let menuSections = distributorSections;
+  let subtitle = "Distributor Portal";
+  if (isManager) {
+    menuSections = managerSections;
+    subtitle = "Manager Portal";
+  } else if (isManagement) {
+    menuSections = managementSections;
+    subtitle = "Management Portal";
+  }
 
   return (
     <aside className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
@@ -120,7 +160,7 @@ export default function Sidebar({ isOpen, closeSidebar, activeTab, setActiveTab 
         <div className={styles.logoMark}>RC</div>
         <div className={styles.logoText}>
           <span className={styles.brand}>RetailConnect</span>
-          <span className={styles.subtitle}>{isManager ? "Manager Portal" : "Distributor Portal"}</span>
+          <span className={styles.subtitle}>{subtitle}</span>
         </div>
       </div>
       
