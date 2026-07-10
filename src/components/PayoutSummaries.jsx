@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FiCheck, FiX, FiDollarSign, FiInfo } from "react-icons/fi";
-import { useToast } from "./ui";
+import { useToast, Table, Badge } from "./ui";
 import styles from "./PayoutSummaries.module.scss";
 
 export default function PayoutSummaries() {
@@ -28,6 +28,75 @@ export default function PayoutSummaries() {
     });
   };
 
+  const columns = [
+    {
+      key: "claimant",
+      header: "Claimant / Partner",
+      render: (v, row) => (
+        <div className={styles.claimantCell}>
+          <span className={styles.name}>{v}</span>
+          <span className={styles.role}>{row.role}</span>
+        </div>
+      )
+    },
+    {
+      key: "territory",
+      header: "Territory Scope"
+    },
+    {
+      key: "type",
+      header: "Payment Type"
+    },
+    {
+      key: "amount",
+      header: "Accrued Amount",
+      align: "right",
+      mono: true
+    },
+    {
+      key: "status",
+      header: "Approval Status",
+      align: "center",
+      render: (v) => (
+        <Badge 
+          tone={v === "Approved" ? "success" : v === "On Hold" ? "warning" : "primary"} 
+          variant="soft"
+        >
+          {v}
+        </Badge>
+      )
+    },
+    {
+      key: "actions",
+      header: "Actions",
+      align: "center",
+      render: (_, p) => (
+        <div className={styles.actionsCell}>
+          {p.status === "Pending" ? (
+            <>
+              <button 
+                className={styles.approveBtn} 
+                onClick={() => handleApprove(p.id, p.claimant, p.amount)}
+                title="Approve & Disburse Payout"
+              >
+                <FiCheck size={16} />
+              </button>
+              <button 
+                className={styles.holdBtn} 
+                onClick={() => handleHold(p.id, p.claimant)}
+                title="Place Payment on Hold"
+              >
+                <FiX size={16} />
+              </button>
+            </>
+          ) : (
+            <span className={styles.completedText}>Authorized</span>
+          )}
+        </div>
+      )
+    }
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.statsGrid}>
@@ -41,66 +110,12 @@ export default function PayoutSummaries() {
         </div>
       </div>
 
-      <div className={styles.tableWrapper}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Claimant / Partner</th>
-              <th>Territory Scope</th>
-              <th>Payment Type</th>
-              <th className={styles.alignRight}>Accrued Amount</th>
-              <th className={styles.alignCenter}>Approval Status</th>
-              <th className={styles.alignCenter}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {payouts.map((p) => (
-              <tr key={p.id}>
-                <td>
-                  <div className={styles.claimantCell}>
-                    <span className={styles.name}>{p.claimant}</span>
-                    <span className={styles.role}>{p.role}</span>
-                  </div>
-                </td>
-                <td>{p.territory}</td>
-                <td>{p.type}</td>
-                <td className={`${styles.numberCell} ${styles.alignRight}`}>{p.amount}</td>
-                <td className={styles.alignCenter}>
-                  <span className={`${styles.statusBadge} ${
-                    p.status === "Approved" ? styles.success : p.status === "On Hold" ? styles.warning : styles.pending
-                  }`}>
-                    {p.status}
-                  </span>
-                </td>
-                <td className={styles.alignCenter}>
-                  <div className={styles.actionsCell}>
-                    {p.status === "Pending" ? (
-                      <>
-                        <button 
-                          className={styles.approveBtn} 
-                          onClick={() => handleApprove(p.id, p.claimant, p.amount)}
-                          title="Approve & Disburse Payout"
-                        >
-                          <FiCheck size={16} />
-                        </button>
-                        <button 
-                          className={styles.holdBtn} 
-                          onClick={() => handleHold(p.id, p.claimant)}
-                          title="Place Payment on Hold"
-                        >
-                          <FiX size={16} />
-                        </button>
-                      </>
-                    ) : (
-                      <span className={styles.completedText}>Authorized</span>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table 
+        columns={columns}
+        data={payouts}
+        rowKey={(row) => row.id}
+        pageSize={5}
+      />
     </div>
   );
 }

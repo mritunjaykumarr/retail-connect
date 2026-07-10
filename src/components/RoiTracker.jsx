@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FiTrendingUp, FiLayers, FiInfo, FiSearch } from "react-icons/fi";
+import { Table, Badge } from "./ui";
 import styles from "./RoiTracker.module.scss";
 
 export default function RoiTracker() {
@@ -17,6 +18,58 @@ export default function RoiTracker() {
     s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     s.territory.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const columns = [
+    {
+      key: "name",
+      header: "Active Scheme Campaign",
+      render: (v) => <span className={styles.schemeName}>{v}</span>
+    },
+    {
+      key: "territory",
+      header: "Territory Scope"
+    },
+    {
+      key: "budget",
+      header: "Budget Spent",
+      align: "right",
+      mono: true
+    },
+    {
+      key: "returns",
+      header: "Returns Impact",
+      align: "right",
+      mono: true,
+      render: (v) => <span className={styles.returnsText}>{v}</span>
+    },
+    {
+      key: "incremental",
+      header: "Incremental Rev",
+      align: "right",
+      mono: true,
+      render: (v) => <span className={styles.incText}>{v}</span>
+    },
+    {
+      key: "roi",
+      header: "Net ROI %",
+      align: "right",
+      mono: true,
+      render: (v) => <span className={styles.roiText}>{v}</span>
+    },
+    {
+      key: "status",
+      header: "Performance",
+      align: "center",
+      render: (v) => (
+        <Badge 
+          tone={v === "High ROI" ? "success" : v === "Low ROI" ? "danger" : "warning"} 
+          variant="soft"
+        >
+          {v}
+        </Badge>
+      )
+    }
+  ];
 
   return (
     <div className={styles.container}>
@@ -47,40 +100,12 @@ export default function RoiTracker() {
         </div>
       </div>
 
-      <div className={styles.tableWrapper}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Active Scheme Campaign</th>
-              <th>Territory Scope</th>
-              <th className={styles.alignRight}>Budget Spent</th>
-              <th className={styles.alignRight}>Returns Impact</th>
-              <th className={styles.alignRight}>Incremental Rev</th>
-              <th className={styles.alignRight}>Net ROI %</th>
-              <th className={styles.alignCenter}>Performance</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredSchemes.map((scheme, idx) => (
-              <tr key={idx}>
-                <td className={styles.schemeName}>{scheme.name}</td>
-                <td>{scheme.territory}</td>
-                <td className={`${styles.numberCell} ${styles.alignRight}`}>{scheme.budget}</td>
-                <td className={`${styles.numberCell} ${styles.alignRight} ${styles.returnsText}`}>{scheme.returns}</td>
-                <td className={`${styles.numberCell} ${styles.alignRight} ${styles.incText}`}>{scheme.incremental}</td>
-                <td className={`${styles.numberCell} ${styles.alignRight} ${styles.roiText}`}>{scheme.roi}</td>
-                <td className={styles.alignCenter}>
-                  <span className={`${styles.statusBadge} ${
-                    scheme.status === "High ROI" ? styles.success : scheme.status === "Low ROI" ? styles.danger : styles.warning
-                  }`}>
-                    {scheme.status}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table 
+        columns={columns}
+        data={filteredSchemes}
+        rowKey={(row) => row.name}
+        pageSize={5}
+      />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FiSearch, FiChevronDown, FiAlertCircle, FiTrendingDown, FiArrowDown } from "react-icons/fi";
+import { Table, Badge } from "./ui";
 import styles from "./SalesGaps.module.scss";
 
 export default function SalesGaps() {
@@ -21,6 +22,58 @@ export default function SalesGaps() {
     const matchesRegion = regionFilter === "All" || item.territory.includes(`(${regionFilter})`);
     return matchesSearch && matchesRegion;
   });
+
+  const columns = [
+    {
+      key: "territory",
+      header: "Territory Route",
+      render: (v) => <span className={styles.territoryName}>{v}</span>
+    },
+    {
+      key: "target",
+      header: "Target Sales",
+      align: "right",
+      mono: true
+    },
+    {
+      key: "actual",
+      header: "Actual Sales",
+      align: "right",
+      mono: true
+    },
+    {
+      key: "gap",
+      header: "Sales Gap",
+      align: "right",
+      mono: true,
+      render: (v) => <span className={styles.gapAmount}>{v}</span>
+    },
+    {
+      key: "deviation",
+      header: "Deviation %",
+      align: "right",
+      mono: true,
+      render: (v, row) => (
+        <span className={row.trend === "down" ? styles.negative : styles.positive}>
+          {v}
+          <FiArrowDown className={styles.trendArrow} style={{ transform: row.trend === "up" ? "rotate(180deg)" : "none" }} />
+        </span>
+      )
+    },
+    {
+      key: "status",
+      header: "Risk Level",
+      align: "center",
+      render: (v) => (
+        <Badge 
+          tone={v === "Critical" ? "danger" : v === "High Risk" ? "warning" : "success"} 
+          variant="soft"
+        >
+          {v}
+        </Badge>
+      )
+    }
+  ];
 
   return (
     <div className={styles.container}>
@@ -61,46 +114,12 @@ export default function SalesGaps() {
         </div>
       </div>
 
-      <div className={styles.tableWrapper}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Territory Route</th>
-              <th className={styles.alignRight}>Target Sales</th>
-              <th className={styles.alignRight}>Actual Sales</th>
-              <th className={styles.alignRight}>Sales Gap</th>
-              <th className={styles.alignRight}>Deviation %</th>
-              <th className={styles.alignCenter}>Risk Level</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.map((item, idx) => (
-              <tr key={idx}>
-                <td className={styles.territoryName}>{item.territory}</td>
-                <td className={`${styles.numberCell} ${styles.alignRight}`}>{item.target}</td>
-                <td className={`${styles.numberCell} ${styles.alignRight}`}>{item.actual}</td>
-                <td className={`${styles.numberCell} ${styles.alignRight} ${styles.gapAmount}`}>{item.gap}</td>
-                <td className={`${styles.numberCell} ${styles.alignRight} ${item.trend === "down" ? styles.negative : styles.positive}`}>
-                  {item.deviation}
-                  <FiArrowDown className={styles.trendArrow} style={{ transform: item.trend === "up" ? "rotate(180deg)" : "none" }} />
-                </td>
-                <td className={styles.alignCenter}>
-                  <span className={`${styles.statusBadge} ${
-                    item.status === "Critical" ? styles.danger : item.status === "High Risk" ? styles.warning : styles.success
-                  }`}>
-                    {item.status}
-                  </span>
-                </td>
-              </tr>
-            ))}
-            {filteredData.length === 0 && (
-              <tr>
-                <td colSpan="6" className={styles.emptyCell}>No territories match your search filters.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <Table 
+        columns={columns}
+        data={filteredData}
+        rowKey={(row) => row.territory}
+        pageSize={5}
+      />
     </div>
   );
 }
