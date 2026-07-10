@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FiSearch, FiChevronDown, FiAlertCircle, FiTrendingDown, FiArrowDown } from "react-icons/fi";
-import { Table, Badge } from "./ui";
+import { Table, Badge, Card, CardBody, Input, Select } from "./ui";
 import styles from "./SalesGaps.module.scss";
 
 export default function SalesGaps() {
@@ -9,12 +9,12 @@ export default function SalesGaps() {
   const [regionFilter, setRegionFilter] = useState("All");
 
   const gapData = [
-    { territory: "East Plaza Beat (East)", target: "₹2,50,000", actual: "₹1,85,000", gap: "₹65,000", deviation: "-26.0%", status: "Critical", trend: "down" },
-    { territory: "West Coast Route (West)", target: "₹3,00,000", actual: "₹2,82,000", gap: "₹18,000", deviation: "-6.0%", status: "On Track", trend: "up" },
-    { territory: "North Main Beat (North)", target: "₹4,20,000", actual: "₹3,45,000", gap: "₹75,000", deviation: "-17.8%", status: "High Risk", trend: "down" },
-    { territory: "South Market Loop (South)", target: "₹3,50,000", actual: "₹3,38,000", gap: "₹12,000", deviation: "-3.4%", status: "On Track", trend: "up" },
-    { territory: "East Bypass Path (East)", target: "₹1,80,000", actual: "₹1,20,000", gap: "₹60,000", deviation: "-33.3%", status: "Critical", trend: "down" },
-    { territory: "North Suburban Loop (North)", target: "₹2,80,000", actual: "₹2,68,000", gap: "₹12,000", deviation: "-4.3%", status: "On Track", trend: "up" }
+    { territory: "East Plaza Beat (East)", target: "₹ 2,50,000", actual: "₹ 1,85,000", gap: "₹ 65,000", deviation: "-26.0%", status: "Critical", trend: "down" },
+    { territory: "West Coast Route (West)", target: "₹ 3,00,000", actual: "₹ 2,82,000", gap: "₹ 18,000", deviation: "-6.0%", status: "On Track", trend: "up" },
+    { territory: "North Main Beat (North)", target: "₹ 4,20,000", actual: "₹ 3,45,000", gap: "₹ 75,000", deviation: "-17.8%", status: "High Risk", trend: "down" },
+    { territory: "South Market Loop (South)", target: "₹ 3,50,000", actual: "₹ 3,38,000", gap: "₹ 12,000", deviation: "-3.4%", status: "On Track", trend: "up" },
+    { territory: "East Bypass Path (East)", target: "₹ 1,80,000", actual: "₹ 1,20,000", gap: "₹ 60,000", deviation: "-33.3%", status: "Critical", trend: "down" },
+    { territory: "North Suburban Loop (North)", target: "₹ 2,80,000", actual: "₹ 2,68,000", gap: "₹ 12,000", deviation: "-4.3%", status: "On Track", trend: "up" }
   ];
 
   const filteredData = gapData.filter((item) => {
@@ -68,6 +68,7 @@ export default function SalesGaps() {
         <Badge 
           tone={v === "Critical" ? "danger" : v === "High Risk" ? "warning" : "success"} 
           variant="soft"
+          dot
         >
           {v}
         </Badge>
@@ -87,39 +88,41 @@ export default function SalesGaps() {
         </p>
       </div>
 
-      <div className={styles.controlsRow}>
-        <div className={styles.searchBox}>
-          <FiSearch size={18} className={styles.searchIcon} />
-          <input 
-            type="text" 
-            placeholder="Search territories..." 
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+      <Card elevated>
+        <CardBody className={styles.cardBodyPaddingNone}>
+          <div className={styles.filtersArea}>
+            <div className={styles.searchBox}>
+              <Input
+                leading={<FiSearch />}
+                placeholder="Search territories..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.filterActions}>
+              <Select
+                value={regionFilter}
+                onChange={(e) => setRegionFilter(e.target.value)}
+                options={[
+                  { value: "All", label: "All Regions" },
+                  { value: "North", label: "North Region" },
+                  { value: "South", label: "South Region" },
+                  { value: "East", label: "East Region" },
+                  { value: "West", label: "West Region" }
+                ]}
+              />
+            </div>
+          </div>
+
+          <Table 
+            columns={columns}
+            data={filteredData}
+            rowKey={(row) => row.territory}
+            pageSize={5}
           />
-        </div>
-
-        <div className={styles.filterMenu}>
-          <select 
-            value={regionFilter} 
-            onChange={(e) => setRegionFilter(e.target.value)}
-            className={styles.selectInput}
-          >
-            <option value="All">All Regions</option>
-            <option value="North">North Region</option>
-            <option value="South">South Region</option>
-            <option value="East">East Region</option>
-            <option value="West">West Region</option>
-          </select>
-          <FiChevronDown size={16} className={styles.chevron} />
-        </div>
-      </div>
-
-      <Table 
-        columns={columns}
-        data={filteredData}
-        rowKey={(row) => row.territory}
-        pageSize={5}
-      />
+        </CardBody>
+      </Card>
     </div>
   );
 }

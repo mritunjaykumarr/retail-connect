@@ -1,17 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import { FiTrendingUp, FiLayers, FiInfo, FiSearch } from "react-icons/fi";
-import { Table, Badge } from "./ui";
+import { Table, Badge, Card, CardBody, Input } from "./ui";
 import styles from "./RoiTracker.module.scss";
 
 export default function RoiTracker() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const schemes = [
-    { name: "Maggi Buy 10 Get 1 Free", territory: "Delhi East", budget: "₹45,000", returns: "₹2,400", incremental: "₹1,85,000", roi: "411%", status: "High ROI" },
-    { name: "Tata Salt Bulk 5% Discount", territory: "All Regions", budget: "₹85,000", returns: "₹1,200", incremental: "₹2,68,000", roi: "315%", status: "On Track" },
-    { name: "KitKat Supermarket Premium Display", territory: "Noida Central", budget: "₹30,000", returns: "₹800", incremental: "₹62,000", roi: "206%", status: "Low ROI" },
-    { name: "Munch Buy 5 Cartons Get ₹500 Claim", territory: "Gurugram Central", budget: "₹25,000", returns: "₹3,500", incremental: "₹58,000", roi: "232%", status: "On Track" }
+    { name: "Maggi Buy 10 Get 1 Free", territory: "Delhi East", budget: "₹ 45,000", returns: "₹ 2,400", incremental: "₹ 1,85,000", roi: "411%", status: "High ROI" },
+    { name: "Tata Salt Bulk 5% Discount", territory: "All Regions", budget: "₹ 85,000", returns: "₹ 1,200", incremental: "₹ 2,68,000", roi: "315%", status: "On Track" },
+    { name: "KitKat Supermarket Premium Display", territory: "Noida Central", budget: "₹ 30,000", returns: "₹ 800", incremental: "₹ 62,000", roi: "206%", status: "Low ROI" },
+    { name: "Munch Buy 5 Cartons Get ₹ 500 Claim", territory: "Gurugram Central", budget: "₹ 25,000", returns: "₹ 3,500", incremental: "₹ 58,000", roi: "232%", status: "On Track" }
   ];
 
   const filteredSchemes = schemes.filter(s => 
@@ -64,6 +64,7 @@ export default function RoiTracker() {
         <Badge 
           tone={v === "High ROI" ? "success" : v === "Low ROI" ? "danger" : "warning"} 
           variant="soft"
+          dot
         >
           {v}
         </Badge>
@@ -88,24 +89,27 @@ export default function RoiTracker() {
         </div>
       </div>
 
-      <div className={styles.controlsRow}>
-        <div className={styles.searchBox}>
-          <FiSearch size={18} className={styles.searchIcon} />
-          <input 
-            type="text" 
-            placeholder="Search active schemes..." 
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-      </div>
+      <Card elevated>
+        <CardBody className={styles.cardBodyPaddingNone}>
+          <div className={styles.filtersArea}>
+            <div className={styles.searchBox}>
+              <Input
+                leading={<FiSearch />}
+                placeholder="Search active schemes..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
 
-      <Table 
-        columns={columns}
-        data={filteredSchemes}
-        rowKey={(row) => row.name}
-        pageSize={5}
-      />
+          <Table 
+            columns={columns}
+            data={filteredSchemes}
+            rowKey={(row) => row.name}
+            pageSize={5}
+          />
+        </CardBody>
+      </Card>
     </div>
   );
 }

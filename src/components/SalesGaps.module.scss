@@ -30,11 +30,17 @@
   }
 }
 
-.controlsRow {
+.cardBodyPaddingNone {
+  padding: 0 !important;
+}
+
+.filtersArea {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: $space-4;
+  padding: $space-4 $space-6;
+  border-bottom: 1px solid var(--border);
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -43,82 +49,14 @@
 }
 
 .searchBox {
-  position: relative;
-  display: flex;
-  align-items: center;
   flex: 1;
-  max-width: 380px;
-  height: 38px;
-
-  .searchIcon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-4);
-    pointer-events: none;
-  }
-
-  input {
-    width: 100%;
-    height: 100%;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    background: var(--surface);
-    color: var(--text-1);
-    font-size: var(--text-sm);
-    outline: none;
-    padding-left: 36px;
-    padding-right: var(--space-4);
-    transition: border-color $duration-base $ease-standard,
-      box-shadow $duration-base $ease-standard;
-
-    &:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 12%, transparent);
-    }
-  }
+  max-width: 420px;
 }
 
-.filterMenu {
-  position: relative;
+.filterActions {
   display: flex;
   align-items: center;
-  width: 180px;
-  height: 38px;
-
-  .selectInput {
-    width: 100%;
-    height: 100%;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    background: var(--surface);
-    color: var(--text-2);
-    font-size: var(--text-sm);
-    padding-left: $space-3;
-    padding-right: $space-8;
-    appearance: none;
-    outline: none;
-    cursor: pointer;
-    transition: border-color $duration-fast $ease-standard;
-
-    &:hover {
-      border-color: var(--border-strong);
-    }
-
-    &:focus {
-      border-color: var(--primary);
-    }
-  }
-
-  .chevron {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-3);
-    pointer-events: none;
-  }
+  gap: $space-2;
 }
 
 .tableWrapper {

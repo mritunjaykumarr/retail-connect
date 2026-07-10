@@ -191,3 +191,13 @@
 .alignCenter {
   text-align: center;
 }
+
+.cardBodyPaddingNone {
+  padding: 0 !important;
+}
+
+.claimantProfile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}

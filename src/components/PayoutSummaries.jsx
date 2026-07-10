@@ -1,17 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import { FiCheck, FiX, FiDollarSign, FiInfo } from "react-icons/fi";
-import { useToast, Table, Badge } from "./ui";
+import { useToast, Table, Badge, Card, CardBody, Avatar } from "./ui";
 import styles from "./PayoutSummaries.module.scss";
 
 export default function PayoutSummaries() {
   const toast = useToast();
   const [payouts, setPayouts] = useState([
-    { id: 1, claimant: "Rohit Sharma", role: "Sales Officer", territory: "North Main", type: "SO Commission", amount: "₹18,450", status: "Pending" },
-    { id: 2, claimant: "Aman Verma", role: "Distributor", territory: "Delhi East", type: "Scheme Claim", amount: "₹42,500", status: "Pending" },
-    { id: 3, claimant: "Neha Patel", role: "Sales Officer", territory: "West Coast", type: "SO Commission", amount: "₹15,200", status: "Approved" },
-    { id: 4, claimant: "Kunal Verma", role: "Distributor", territory: "Delhi Central", type: "Scheme Claim", amount: "₹38,000", status: "Pending" },
-    { id: 5, claimant: "Priya Singh", role: "Sales Officer", territory: "East Plaza", type: "SO Commission", amount: "₹12,800", status: "Approved" }
+    { id: 1, claimant: "Rohit Sharma", role: "Sales Officer", territory: "North Main", type: "SO Commission", amount: "₹ 18,450", status: "Pending", avatar: "https://i.pravatar.cc/150?u=rohit" },
+    { id: 2, claimant: "Aman Verma", role: "Distributor", territory: "Delhi East", type: "Scheme Claim", amount: "₹ 42,500", status: "Pending", avatar: "https://i.pravatar.cc/150?u=aman" },
+    { id: 3, claimant: "Neha Patel", role: "Sales Officer", territory: "West Coast", type: "SO Commission", amount: "₹ 15,200", status: "Approved", avatar: "https://i.pravatar.cc/150?u=neha" },
+    { id: 4, claimant: "Kunal Verma", role: "Distributor", territory: "Delhi Central", type: "Scheme Claim", amount: "₹ 38,000", status: "Pending", avatar: "https://i.pravatar.cc/150?u=kunal" },
+    { id: 5, claimant: "Priya Singh", role: "Sales Officer", territory: "East Plaza", type: "SO Commission", amount: "₹ 12,800", status: "Approved", avatar: "https://i.pravatar.cc/150?u=priya" }
   ]);
 
   const handleApprove = (id, name, amount) => {
@@ -33,9 +33,12 @@ export default function PayoutSummaries() {
       key: "claimant",
       header: "Claimant / Partner",
       render: (v, row) => (
-        <div className={styles.claimantCell}>
-          <span className={styles.name}>{v}</span>
-          <span className={styles.role}>{row.role}</span>
+        <div className={styles.claimantProfile}>
+          <Avatar name={v} src={row.avatar} size="sm" shape="rounded" />
+          <div className={styles.claimantCell}>
+            <span className={styles.name}>{v}</span>
+            <span className={styles.role}>{row.role}</span>
+          </div>
         </div>
       )
     },
@@ -59,8 +62,9 @@ export default function PayoutSummaries() {
       align: "center",
       render: (v) => (
         <Badge 
-          tone={v === "Approved" ? "success" : v === "On Hold" ? "warning" : "primary"} 
+          tone={v === "Approved" ? "success" : v === "On Hold" ? "danger" : "warning"} 
           variant="soft"
+          dot
         >
           {v}
         </Badge>
@@ -110,12 +114,16 @@ export default function PayoutSummaries() {
         </div>
       </div>
 
-      <Table 
-        columns={columns}
-        data={payouts}
-        rowKey={(row) => row.id}
-        pageSize={5}
-      />
+      <Card elevated>
+        <CardBody className={styles.cardBodyPaddingNone}>
+          <Table 
+            columns={columns}
+            data={payouts}
+            rowKey={(row) => row.id}
+            pageSize={5}
+          />
+        </CardBody>
+      </Card>
     </div>
   );
 }
