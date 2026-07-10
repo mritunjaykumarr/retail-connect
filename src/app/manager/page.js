@@ -9,7 +9,7 @@ import BeatDesigner from "../../components/BeatDesigner";
 import FieldMonitoring from "../../components/FieldMonitoring";
 import SchemeBuilder from "../../components/SchemeBuilder";
 import IncentivePlanner from "../../components/IncentivePlanner";
-import { Modal, Button, Input, Checkbox, useToast } from "../../components/ui";
+import { Modal, Button, Input, Checkbox, Select, useToast } from "../../components/ui";
 import { FiPlus, FiCalendar, FiChevronDown } from "react-icons/fi";
 import styles from "./page.module.scss";
 
@@ -131,34 +131,30 @@ export default function Home() {
         }
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
-            <label style={{ fontSize: "var(--text-caption)", fontWeight: 600, color: "var(--text-2)" }}>Select Sales Officer</label>
-            <select 
-              value={selectedSO} 
-              onChange={(e) => setSelectedSO(e.target.value)}
-              className={styles.dropdown}
-            >
-              <option value="">-- Choose Officer --</option>
-              <option value="Rohit Sharma">Rohit Sharma</option>
-              <option value="Neha Patel">Neha Patel</option>
-              <option value="Arjun Mehta">Arjun Mehta</option>
-              <option value="Priya Singh">Priya Singh</option>
-            </select>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
-            <label style={{ fontSize: "var(--text-caption)", fontWeight: 600, color: "var(--text-2)" }}>Select Target Beat</label>
-            <select 
-              value={selectedBeat} 
-              onChange={(e) => setSelectedBeat(e.target.value)}
-              className={styles.dropdown}
-            >
-              <option value="">-- Choose Beat --</option>
-              <option value="North Main Route">North Main Route (BEAT-001)</option>
-              <option value="West Coast Markets">West Coast Markets (BEAT-002)</option>
-              <option value="South Core Loop">South Core Loop (BEAT-003)</option>
-              <option value="East Retail Plaza">East Retail Plaza (BEAT-004)</option>
-            </select>
-          </div>
+          <Select
+            label="Select Sales Officer"
+            placeholder="-- Choose Officer --"
+            options={[
+              { value: "Rohit Sharma", label: "Rohit Sharma" },
+              { value: "Neha Patel", label: "Neha Patel" },
+              { value: "Arjun Mehta", label: "Arjun Mehta" },
+              { value: "Priya Singh", label: "Priya Singh" },
+            ]}
+            value={selectedSO}
+            onChange={(e) => setSelectedSO(e.target.value)}
+          />
+          <Select
+            label="Select Target Beat"
+            placeholder="-- Choose Beat --"
+            options={[
+              { value: "North Main Route", label: "North Main Route (BEAT-001)" },
+              { value: "West Coast Markets", label: "West Coast Markets (BEAT-002)" },
+              { value: "South Core Loop", label: "South Core Loop (BEAT-003)" },
+              { value: "East Retail Plaza", label: "East Retail Plaza (BEAT-004)" },
+            ]}
+            value={selectedBeat}
+            onChange={(e) => setSelectedBeat(e.target.value)}
+          />
         </div>
       </Modal>
     </DashboardLayout>

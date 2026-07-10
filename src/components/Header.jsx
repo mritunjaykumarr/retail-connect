@@ -18,7 +18,7 @@ export default function Header({ toggleSidebar }) {
         <div className={styles.searchContainer}>
           <FiSearch size={16} className={styles.searchIcon} />
           <input type="text" placeholder="Search orders, items, officers, invoices..." />
-          <div className={styles.shortcutKey}>⌘K</div>
+          <kbd className={styles.shortcutKey}>⌘K</kbd>
         </div>
       </div>
         

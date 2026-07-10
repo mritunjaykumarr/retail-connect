@@ -202,7 +202,7 @@ export default function BeatDesigner() {
 
             <h4 className={styles.drawerTitle}>Assigned Sales Officer</h4>
             <div className={styles.soSelectionCard}>
-              <FiUsers size={20} color="var(--primary)" />
+              <FiUsers size={20} />
               <div className={styles.soDetails}>
                 <strong>{selectedBeat.officer}</strong>
                 <span>Assigned Beat Owner</span>

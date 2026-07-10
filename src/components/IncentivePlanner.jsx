@@ -53,7 +53,7 @@ export default function IncentivePlanner() {
       mono: true,
       sortable: true,
       render: (v) => (
-        <strong style={{ color: parseFloat(v) >= 100 ? "var(--success)" : "var(--text-2)" }}>
+        <strong className={parseFloat(v) >= 100 ? styles.achievedTarget : ""}>
           {v}
         </strong>
       )

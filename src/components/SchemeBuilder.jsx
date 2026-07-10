@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FiPlus, FiTag, FiCalendar, FiShoppingBag, FiLayers, FiAlertCircle } from "react-icons/fi";
-import { Table, Badge, Button, StatCard, Modal, Input, Checkbox, useToast, Card, CardBody } from "./ui";
+import { Table, Badge, Button, StatCard, Modal, Input, Checkbox, Select, useToast, Card, CardBody } from "./ui";
 import styles from "./SchemeBuilder.module.scss";
 
 const initialSchemes = [
@@ -70,7 +70,7 @@ export default function SchemeBuilder() {
       sortable: true,
       render: (v) => (
         <span className={styles.skuLabel}>
-          <FiShoppingBag style={{ marginRight: 6, color: "var(--text-3)" }} />
+          <FiShoppingBag size={14} />
           {v}
         </span>
       )
@@ -158,18 +158,16 @@ export default function SchemeBuilder() {
             onChange={(e) => setNewSchemeDiscount(e.target.value)}
             required
           />
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
-            <label style={{ fontSize: "var(--text-caption)", fontWeight: 600, color: "var(--text-2)" }}>Target Stores Segment</label>
-            <select 
-              value={newSchemeTarget} 
-              onChange={(e) => setNewSchemeTarget(e.target.value)}
-              className={styles.dropdown}
-            >
-              <option value="All Retailers">All Retailers</option>
-              <option value="Supermarkets Only">Supermarkets Only</option>
-              <option value="Selected Outlets">Selected Outlets</option>
-            </select>
-          </div>
+          <Select
+            label="Target Stores Segment"
+            options={[
+              { value: "All Retailers", label: "All Retailers" },
+              { value: "Supermarkets Only", label: "Supermarkets Only" },
+              { value: "Selected Outlets", label: "Selected Outlets" },
+            ]}
+            value={newSchemeTarget}
+            onChange={(e) => setNewSchemeTarget(e.target.value)}
+          />
           <Checkbox label="Auto-apply scheme inside Sales Officer mobile app" defaultChecked />
         </div>
       </Modal>
